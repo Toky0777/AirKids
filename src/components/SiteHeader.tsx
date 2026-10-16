@@ -66,7 +66,7 @@ export default function SiteHeader({ pathname, logoSrc, nav, phone, email }: Pro
           />
         </a>
 
-        <nav aria-label="Navigation principale" className="ml-2 hidden items-center lg:flex">
+        <nav aria-label="Navigation principale" className="ml-1 hidden items-center lg:flex">
           {nav.map((item) => {
             const active =
               item.href === "/"
@@ -80,8 +80,8 @@ export default function SiteHeader({ pathname, logoSrc, nav, phone, email }: Pro
                 aria-current={active ? "page" : undefined}
                 className={
                   active
-                    ? "rounded-full bg-white px-3 py-2 text-[15px] font-bold text-forest shadow-sm"
-                    : "rounded-full px-3 py-2 text-[15px] font-semibold text-ink-soft transition hover:bg-white/70 hover:text-forest"
+                    ? "rounded-full bg-white px-2 py-2 text-[13px] font-bold text-forest whitespace-nowrap shadow-sm xl:text-sm 2xl:px-3 2xl:text-[15px]"
+                    : "rounded-full px-2 py-2 text-[13px] font-semibold text-ink-soft whitespace-nowrap transition hover:bg-white/70 hover:text-forest xl:text-sm 2xl:px-3 2xl:text-[15px]"
                 }
               >
                 {item.label}
@@ -93,7 +93,7 @@ export default function SiteHeader({ pathname, logoSrc, nav, phone, email }: Pro
         <div className="ml-auto flex items-center gap-2">
           <a
             href={phone.href}
-            className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm font-bold text-forest transition hover:bg-white/70 xl:inline-flex"
+            className="hidden shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-3 py-2 text-sm font-bold text-forest transition hover:bg-white/70 2xl:inline-flex"
           >
             <InlineIcon name="phone" className="size-4" />
             {phone.display}
@@ -106,7 +106,7 @@ export default function SiteHeader({ pathname, logoSrc, nav, phone, email }: Pro
           <a
             href={phone.href}
             aria-label={`Appeler l'école au ${phone.display}`}
-            className="inline-flex size-11 items-center justify-center rounded-full border-2 border-forest/20 text-forest transition hover:border-forest md:hidden"
+            className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border-2 border-forest/20 text-forest transition hover:border-forest md:inline-flex 2xl:hidden"
           >
             <InlineIcon name="phone" className="size-5" />
           </a>
