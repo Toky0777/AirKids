@@ -1,0 +1,32 @@
+---
+/** Section 9 — Informations pratiques : adresse, contact, horaires. */
+import Icon from "@/components/Icon.astro";
+import PracticalInfo from "@/components/PracticalInfo.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+---
+
+<div class="bg-white" aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="block h-8 w-full text-cream sm:h-12">
+    <path d="M0 26c160 26 320 26 480 0s320-26 480 0 320 26 480 0v34H0z" fill="currentColor"></path>
+  </svg>
+</div>
+
+<section id="infos-pratiques" class="bg-white pb-20 pt-10 sm:pt-12 lg:pb-28">
+  <div class="container-x">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <SectionHeading
+        eyebrow="Informations pratiques"
+        eyebrowIcon="map-pin"
+        title="Nous trouver, nous appeler, préparer votre visite"
+      />
+      <p class="flex items-center gap-2 text-sm font-semibold text-ink-soft">
+        <Icon name="clock" class="size-4 text-sage-deep" />
+        Accueil du lundi au vendredi
+      </p>
+    </div>
+
+    <div class="mt-12">
+      <PracticalInfo />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,153 @@
+---
+/** Pied de page : présentation, navigation, services, coordonnées, mentions. */
+import Doodle from "@/components/Doodle.astro";
+import Icon from "@/components/Icon.astro";
+import { mainNav } from "@/data/navigation";
+import { services } from "@/data/services";
+import { site } from "@/data/site";
+import logo from "@/assets/images/logo-air-kids.png";
+
+const year = new Date().getFullYear();
+---
+
+<div class="bg-cream" aria-hidden="true">
+  <Doodle kind="wave" class="block h-8 w-full text-forest-deep sm:h-12" />
+</div>
+
+<footer class="bg-forest-deep text-cream">
+  <div class="container-x grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr] lg:gap-8">
+    <div>
+      <span class="inline-flex rounded-3xl bg-cream px-4 py-3 shadow-soft">
+        <img
+          src={logo.src}
+          alt="Air Kids Madagascar"
+          width={230}
+          height={74}
+          class="h-12 w-auto"
+          loading="lazy"
+          decoding="async"
+        />
+      </span>
+      <p class="mt-5 max-w-sm text-[15px] leading-relaxed text-cream/85">
+        Crèche, préscolaire et garderie à Ankerana, Antananarivo. Un petit monde pour
+        grandir, explorer et s'épanouir, au contact de la nature.
+      </p>
+      <p class="mt-5 flex items-start gap-3 text-[15px] text-cream/85">
+        <Icon name="map-pin" class="mt-0.5 size-5 text-sun" />
+        <span>
+          {site.address.street}<br />
+          {site.address.city} {site.address.postalCode} — {site.address.country}
+        </span>
+      </p>
+    </div>
+
+    <nav aria-label="Liens du pied de page">
+      <h2 class="font-display text-lg font-semibold text-cream">Le site</h2>
+      <ul class="mt-4 space-y-2.5 text-[15px]">
+        {
+          mainNav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-cream/85 underline-offset-4 transition hover:text-sun hover:underline"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <nav aria-label="Nos services">
+      <h2 class="font-display text-lg font-semibold text-cream">Nos services</h2>
+      <ul class="mt-4 space-y-2.5 text-[15px]">
+        {
+          services.map((service) => (
+            <li>
+              <a
+                href={`/nos-services/#${service.anchor}`}
+                class="text-cream/85 underline-offset-4 transition hover:text-sun hover:underline"
+              >
+                {service.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="font-display text-lg font-semibold text-cream">Nous contacter</h2>
+      <ul class="mt-4 space-y-3 text-[15px]">
+        <li>
+          <a
+            href={site.phone.href}
+            class="inline-flex items-center gap-2.5 font-bold text-cream transition hover:text-sun"
+          >
+            <Icon name="phone" class="size-5 text-sun" />
+            {site.phone.display}
+          </a>
+        </li>
+        <li>
+          <a
+            href={`mailto:${site.emails.primary}`}
+            class="inline-flex items-center gap-2.5 text-cream/85 transition hover:text-sun"
+          >
+            <Icon name="mail" class="size-5 text-sun" />
+            {site.emails.primary}
+          </a>
+        </li>
+        <li>
+          <a
+            href={`mailto:${site.emails.direction}`}
+            class="inline-flex items-center gap-2.5 text-cream/85 transition hover:text-sun"
+          >
+            <Icon name="mail" class="size-5 text-sun" />
+            {site.emails.direction}
+          </a>
+        </li>
+        <li class="flex items-center gap-2.5 text-cream/85">
+          <Icon name="clock" class="size-5 text-sun" />
+          {site.openingDays}, horaires détaillés sur la page
+          <a href="/nos-services/#horaires" class="underline decoration-sun/60 decoration-2 underline-offset-4 hover:text-sun">
+            Nos services
+          </a>
+        </li>
+      </ul>
+
+      <a
+        href={site.mapsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-sun underline decoration-sun/50 decoration-2 underline-offset-4 hover:decoration-sun"
+      >
+        <Icon name="map-pin" class="size-4" />
+        Ouvrir l'itinéraire
+        <Icon name="external-link" class="size-3.5" />
+      </a>
+    </div>
+  </div>
+
+  <div class="border-t border-cream/15">
+    <div
+      class="container-x flex flex-col gap-4 py-6 text-sm text-cream/70 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>
+        © {year} Air Kids Madagascar. Tous droits réservés. Photographies : Air Kids Madagascar.
+      </p>
+      <ul class="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <li>
+          <a href="/mentions-legales/" class="underline-offset-4 transition hover:text-sun hover:underline">
+            Mentions légales
+          </a>
+        </li>
+        <li>
+          <a href="/confidentialite/" class="underline-offset-4 transition hover:text-sun hover:underline">
+            Politique de confidentialité
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>

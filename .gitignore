@@ -1,0 +1,19 @@
+# Dépendances
+node_modules/
+
+# Build Astro
+dist/
+.astro/
+
+# Environnement
+.env
+.env.*
+!.env.example
+
+# Photos sources téléchargées depuis l'ancien site (voir README.md)
+assets-source/
+
+# Divers
+.DS_Store
+Thumbs.db
+*.log

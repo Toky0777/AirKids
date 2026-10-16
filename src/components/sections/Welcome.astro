@@ -1,0 +1,93 @@
+---
+/** Section 2 — Bienvenue : présentation éditoriale de l'établissement. */
+import { Image } from "astro:assets";
+import Doodle from "@/components/Doodle.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import welcomeMain from "@/assets/images/jeux-exterieur-maisonnette.jpg";
+import welcomeSmall from "@/assets/images/batiment-facade.jpg";
+---
+
+<section id="bienvenue" class="section-pad">
+  <div class="container-x grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+    <div class="relative mx-auto w-full max-w-lg lg:max-w-none" data-reveal>
+      <Doodle kind="blob" class="absolute -left-14 -top-10 h-52 w-52 text-sky/25" />
+
+      <div class="relative overflow-hidden rounded-[2.5rem] border-[6px] border-white shadow-soft">
+        <Image
+          src={welcomeMain}
+          alt="Des enfants jouent autour d'une maisonnette rose, encadrés par une éducatrice sur la pelouse"
+          widths={[420, 620, 800]}
+          sizes="(min-width: 1024px) 44vw, 92vw"
+          loading="lazy"
+          decoding="async"
+          class="aspect-[4/3] w-full object-cover"
+        />
+      </div>
+
+      <figure
+        class="absolute -bottom-8 right-0 w-36 rotate-[3deg] overflow-hidden rounded-2xl border-4 border-white shadow-card sm:w-48"
+      >
+        <Image
+          src={welcomeSmall}
+          alt="La façade blanche et verte de l'école, entourée d'arbres"
+          widths={[200, 300]}
+          sizes="190px"
+          loading="lazy"
+          decoding="async"
+          class="aspect-[4/3] w-full object-cover"
+        />
+      </figure>
+
+      <p
+        class="absolute -top-5 right-4 inline-flex items-center gap-2 rounded-2xl bg-sun px-4 py-3 font-display font-semibold text-ink shadow-card"
+      >
+        <Icon name="leaf" class="size-5" />
+        2 000 m² d'espaces verts
+      </p>
+    </div>
+
+    <div>
+      <SectionHeading
+        eyebrow="Bienvenue"
+        eyebrowIcon="sun"
+        title="Bienvenue dans le petit monde d'Air Kids"
+      />
+
+      <div class="mt-6 space-y-5 text-[1.05rem] leading-relaxed text-ink-soft" data-reveal>
+        <p>
+          Air Kids est un établissement d'éducation préscolaire qui réunit une
+          <strong class="text-forest">crèche</strong>, une
+          <strong class="text-forest">maternelle</strong> et une
+          <strong class="text-forest">garderie</strong>, dans un cadre verdoyant au cœur
+          d'Ankerana, à Antananarivo.
+        </p>
+        <p>
+          Ici, l'enfant apprend par la découverte, l'expérimentation, le jeu et les
+          interactions avec les autres. Chaque journée est pensée pour l'éveiller,
+          l'encourager et l'accompagner à son rythme.
+        </p>
+      </div>
+
+      <ul class="mt-7 flex flex-wrap gap-2.5" data-reveal style="--reveal-delay: 120ms">
+        <li class="inline-flex items-center gap-2 rounded-full bg-sky/20 px-4 py-2 text-sm font-bold text-ink">
+          <Icon name="baby" class="size-4 text-sky-deep" />
+          Crèche · 3 – 24 mois
+        </li>
+        <li class="inline-flex items-center gap-2 rounded-full bg-sun/30 px-4 py-2 text-sm font-bold text-ink">
+          <Icon name="blocks" class="size-4 text-sun-deep" />
+          Maternelle · 2 – 6 ans
+        </li>
+        <li class="inline-flex items-center gap-2 rounded-full bg-sage/20 px-4 py-2 text-sm font-bold text-ink">
+          <Icon name="clock" class="size-4 text-sage-deep" />
+          Garderie avant / après l'école
+        </li>
+      </ul>
+
+      <a href="/notre-ecole/" class="link-more mt-7" data-reveal style="--reveal-delay: 200ms">
+        En savoir plus sur notre école
+        <Icon name="arrow-right" class="size-4" />
+      </a>
+    </div>
+  </div>
+</section>

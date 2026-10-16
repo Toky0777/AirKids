@@ -1,0 +1,72 @@
+---
+/** Section 7 — Une journée chez Air Kids : déroulé illustratif. */
+import { Image } from "astro:assets";
+import Doodle from "@/components/Doodle.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import { dayMoments } from "@/data/dayMoments";
+---
+
+<section class="relative overflow-hidden bg-sand py-20 sm:py-24">
+  <Doodle kind="dots" class="absolute left-6 top-10 h-10 w-10 text-sage/60" />
+  <Doodle kind="dots" class="absolute bottom-10 right-8 h-10 w-10 text-coral/60" />
+
+  <div class="container-x relative">
+    <SectionHeading
+      align="center"
+      class="mx-auto items-center text-center"
+      eyebrow="Une journée chez Air Kids"
+      eyebrowIcon="sunrise"
+      title="Des journées rythmées par le jeu et la découverte"
+      intro="Un aperçu du déroulé d'une journée : chaque section avance à son rythme, selon l'âge et les besoins des enfants."
+    />
+
+    <ol class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        dayMoments.map((moment, index) => (
+          <li
+            class:list={[
+              "flex flex-col overflow-hidden rounded-[1.75rem] bg-white shadow-card",
+              index === 0 && "sm:col-span-2 lg:col-span-1",
+            ]}
+            data-reveal
+            style={`--reveal-delay: ${index * 60}ms`}
+          >
+            {moment.image && (
+              <Image
+                src={moment.image}
+                alt={moment.imageAlt ?? ""}
+                widths={[380, 560]}
+                sizes="(min-width: 1024px) 30vw, 92vw"
+                loading="lazy"
+                decoding="async"
+                class="aspect-[16/9] w-full object-cover"
+              />
+            )}
+            <div class="flex flex-1 gap-4 p-5">
+              <span class="icon-chip size-11 bg-cream text-forest">
+                <Icon name={moment.icon} class="size-5" />
+              </span>
+              <span>
+                <h3 class="font-display text-lg font-semibold text-forest">{moment.title}</h3>
+                <p class="mt-1 text-[15px] leading-relaxed text-ink-soft">{moment.text}</p>
+              </span>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p
+      class="mx-auto mt-10 flex max-w-2xl items-start gap-2 rounded-2xl bg-white/80 px-5 py-4 text-sm text-ink-soft"
+      data-reveal
+    >
+      <Icon name="info" class="mt-0.5 size-4 shrink-0 text-sky-deep" />
+      Déroulé donné à titre indicatif : l'organisation varie selon les sections et les jours.
+      Les horaires d'accueil et de sortie figurent dans la rubrique
+      <a href="#infos-pratiques" class="font-bold text-forest underline underline-offset-4">
+        Informations pratiques
+      </a>.
+    </p>
+  </div>
+</section>

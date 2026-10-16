@@ -1,0 +1,291 @@
+---
+/**
+ * Notre environnement : les 2 000 m² d'espaces verts (confirmés sur la page
+ * « Infrastructure » du site actuel), le jardin, le potager, les aires de jeu
+ * et la place de la nature dans les apprentissages.
+ */
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Icon from "@/components/Icon.astro";
+import Doodle from "@/components/Doodle.astro";
+import type { IconName } from "@/components/icon-map";
+import aeriennePhoto from "@/assets/images/vue-aerienne-jardin.jpg";
+import jardinArbresPhoto from "@/assets/images/galerie-16.jpg";
+import potagerPhoto from "@/assets/images/mini-potager.jpg";
+import aireDeJeuxPhoto from "@/assets/images/aire-de-jeux.jpg";
+import motricitePhoto from "@/assets/images/galerie-03.jpg";
+import cloturePhoto from "@/assets/images/galerie-04.jpg";
+import arbreBancPhoto from "@/assets/images/galerie-12.jpg";
+import pelousePhoto from "@/assets/images/galerie-05.jpg";
+import tennisPhoto from "@/assets/images/galerie-15.jpg";
+
+const title = "Notre environnement : 2 000 m² d'espaces verts à Ankerana | Air Kids Madagascar";
+const description =
+  "Jardin, arbres, mini-potager, aires de jeu et terrain de sport : découvrez les 2 000 m² d'espaces verts d'Air Kids à Ankerana, Antananarivo, où la nature fait partie des apprentissages.";
+
+const spaces = [
+  {
+    image: jardinArbresPhoto,
+    alt: "Le jardin et ses grands arbres : une table verte et des chaises sur la pelouse",
+    title: "Le jardin et ses arbres",
+    text: "Un jardin aéré, des zones d'ombre et des coins calmes pour les promenades, les jeux et les temps de respiration.",
+    delay: 0,
+  },
+  {
+    image: potagerPhoto,
+    alt: "Le mini-potager de l'école et son panneau en bois, avec de jeunes plants en rangs",
+    title: "Le mini-potager",
+    text: "Selon leur âge, les enfants sèment, cultivent, récoltent et cuisinent : le potager relie la nature à l'assiette.",
+    delay: 70,
+  },
+  {
+    image: aireDeJeuxPhoto,
+    alt: "La pelouse de l'école avec une maisonnette, un toboggan, une bascule et le bâtiment principal en arrière-plan",
+    title: "Les aires de jeux",
+    text: "Maisonnette, toboggan, bascule : des jeux installés sur la pelouse, adaptés à la taille des enfants.",
+    delay: 140,
+  },
+  {
+    image: tennisPhoto,
+    alt: "Le terrain de tennis de l'école, utilisé pendant les ateliers sportifs",
+    title: "Le terrain de sport",
+    text: "Un terrain de tennis accueille les ateliers sportifs : tennis, mini-foot, motricité et grands jeux.",
+    delay: 210,
+  },
+] as const;
+
+const learnCards: Array<{ icon: IconName; title: string; text: string }> = [
+  {
+    icon: "sprout",
+    title: "Observer et nommer les végétaux",
+    text: "Les plantes du jardin sont identifiées par leur nom français, leur nom scientifique et leur utilité : la nature devient un support d'apprentissage.",
+  },
+  {
+    icon: "leaf",
+    title: "Prendre soin du vivant",
+    text: "Semer, arroser, récolter : les enfants apprennent à respecter les végétaux et à observer les saisons.",
+  },
+  {
+    icon: "recycle",
+    title: "Des équipements pensés autrement",
+    text: "Les équipements sont adaptés à la taille des enfants et, dans la mesure du possible, réalisés à partir de matériaux recyclés.",
+  },
+];
+
+const practicalNotes = [
+  "Les activités extérieures font partie de la journée : jeux libres, promenades et jardin quand le temps le permet.",
+  "La pelouse et les zones plantées sont aménagées pour que les enfants circulent et jouent en sécurité.",
+  "Le mini-potager et le jardin se visitent lors de votre venue : demandez à les voir pendant la visite.",
+] as const;
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    breadcrumb="Notre environnement"
+    eyebrow="Notre environnement"
+    eyebrowIcon="leaf"
+    title="2 000 m² d'espaces verts pour apprendre dehors"
+    intro="À Ankerana, l'école est installée sur un espace vert de 2 000 m² : jardin, arbres, mini-potager et aires de jeu font partie du quotidien des enfants."
+  />
+
+  <section class="section-pad">
+    <div class="container-x">
+      <figure class="relative overflow-hidden rounded-[2.5rem] shadow-soft" data-reveal>
+        <Image
+          src={aeriennePhoto}
+          alt="Vue aérienne du jardin de l'école : pelouse, allées, jeux et espaces plantés"
+          widths={[620, 900, 1200]}
+          sizes="92vw"
+          loading="lazy"
+          decoding="async"
+          class="aspect-[16/9] w-full object-cover sm:aspect-[21/9]"
+        />
+        <figcaption
+          class="absolute left-4 top-4 inline-flex items-center gap-2 rounded-2xl bg-sun px-4 py-3 font-display font-semibold text-ink shadow-card sm:left-6 sm:top-6"
+        >
+          <Icon name="leaf" class="size-5" />
+          2 000 m² d'espaces verts à Ankerana
+        </figcaption>
+        <Doodle kind="cloud" class="absolute bottom-5 right-6 h-7 w-14 text-cream/80 animate-float" />
+      </figure>
+
+      <div class="mt-10 grid items-start gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
+        <SectionHeading
+          eyebrow="Le cadre"
+          eyebrowIcon="sun"
+          title="La nature fait aussi partie de la classe"
+          intro="L'apprentissage commence dès les espaces extérieurs : observer, nommer, semer, grimper, respirer."
+        />
+        <div class="space-y-4 leading-relaxed text-ink-soft" data-reveal>
+          <p>
+            Chez Air Kids, le jardin n'est pas un simple décor : c'est un lieu de découverte
+            et d'expérimentation. Les enfants y observent les plantes, suivent les saisons,
+            participent au mini-potager et profitent de grands espaces pour bouger.
+          </p>
+          <p>
+            Ce cadre verdoyant complète le travail mené en classe : la motricité, le langage,
+            l'observation et l'esprit écologique s'y exercent naturellement, au fil des
+            promenades et des jeux.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2">
+        {
+          spaces.map((space) => (
+            <figure
+              class="overflow-hidden rounded-[2rem] bg-white shadow-card"
+              data-reveal
+              style={`--reveal-delay: ${space.delay}ms`}
+            >
+              <Image
+                src={space.image}
+                alt={space.alt}
+                widths={[420, 620]}
+                sizes="(min-width: 640px) 46vw, 92vw"
+                loading="lazy"
+                decoding="async"
+                class="aspect-[16/10] w-full object-cover"
+              />
+              <figcaption class="p-5 sm:p-6">
+                <h3 class="font-display text-xl font-semibold text-forest">{space.title}</h3>
+                <p class="mt-2 text-[15px] leading-relaxed text-ink-soft">{space.text}</p>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white pb-20 pt-16 sm:pt-20 lg:pb-28">
+    <div class="container-x">
+      <SectionHeading
+        align="center"
+        class="mx-auto items-center text-center"
+        eyebrow="Apprendre dehors"
+        eyebrowIcon="sprout"
+        title="Le jardin comme terrain d'apprentissage"
+        intro="Observer, prendre soin, recommencer : les gestes du jardinier sont aussi des gestes d'élève."
+      />
+
+      <ul class="mt-12 grid gap-5 lg:grid-cols-3">
+        {
+          learnCards.map((card, index) => (
+            <li
+              class="rounded-[1.75rem] bg-cream p-6 shadow-sm ring-1 ring-ink/5"
+              data-reveal
+              style={`--reveal-delay: ${index * 70}ms`}
+            >
+              <span class="icon-chip bg-white text-forest shadow-sm">
+                <Icon name={card.icon} class="size-6" />
+              </span>
+              <h3 class="mt-4 font-display text-xl font-semibold text-forest">{card.title}</h3>
+              <p class="mt-3 text-[15px] leading-relaxed text-ink-soft">{card.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mt-12 grid gap-5 lg:grid-cols-3">
+        <figure class="overflow-hidden rounded-[2rem] shadow-card" data-reveal>
+          <Image
+            src={cloturePhoto}
+            alt="Une clôture en bois aux couleurs vives au milieu des plantations du jardin"
+            widths={[420, 620]}
+            sizes="(min-width: 1024px) 30vw, 92vw"
+            loading="lazy"
+            decoding="async"
+            class="aspect-[4/3] w-full object-cover"
+          />
+          <figcaption class="bg-white p-4 text-sm text-ink-soft">
+            <span class="font-display font-semibold text-forest">Les couleurs du jardin.</span>
+            Les plantations et les espaces fleuris accompagnent les promenades.
+          </figcaption>
+        </figure>
+
+        <figure class="overflow-hidden rounded-[2rem] shadow-card" data-reveal style="--reveal-delay: 70ms">
+          <Image
+            src={arbreBancPhoto}
+            alt="Le jardin : un arbre et un banc tressé au milieu de la pelouse"
+            widths={[420, 620]}
+            sizes="(min-width: 1024px) 30vw, 92vw"
+            loading="lazy"
+            decoding="async"
+            class="aspect-[4/3] w-full object-cover"
+          />
+          <figcaption class="bg-white p-4 text-sm text-ink-soft">
+            <span class="font-display font-semibold text-forest">Les coins calmes.</span>
+            De l'ombre et des bancs pour souffler, regarder, discuter.
+          </figcaption>
+        </figure>
+
+        <figure class="overflow-hidden rounded-[2rem] shadow-card" data-reveal style="--reveal-delay: 140ms">
+          <Image
+            src={pelousePhoto}
+            alt="La pelouse, le toboggan et le bâtiment principal sous les arbres"
+            widths={[420, 620]}
+            sizes="(min-width: 1024px) 30vw, 92vw"
+            loading="lazy"
+            decoding="async"
+            class="aspect-[4/3] w-full object-cover"
+          />
+          <figcaption class="bg-white p-4 text-sm text-ink-soft">
+            <span class="font-display font-semibold text-forest">La pelouse.</span>
+            L'espace des grands jeux, des parcours et des rires.
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="mt-12 grid gap-5 lg:grid-cols-2">
+        <ul class="space-y-3" data-reveal>
+          {
+            practicalNotes.map((note) => (
+              <li class="flex items-start gap-3 rounded-2xl bg-cream px-5 py-4 text-[15px] text-ink-soft">
+                <Icon name="circle-check" class="mt-0.5 size-5 shrink-0 text-sage-deep" />
+                <span>{note}</span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <figure class="relative overflow-hidden rounded-[2rem] shadow-card" data-reveal>
+          <Image
+            src={motricitePhoto}
+            alt="La structure de motricité en cordes, installée sur la pelouse"
+            widths={[420, 620]}
+            sizes="(min-width: 1024px) 46vw, 92vw"
+            loading="lazy"
+            decoding="async"
+            class="h-full w-full object-cover"
+          />
+          <figcaption
+            class="absolute bottom-4 left-4 right-4 rounded-2xl bg-cream/95 px-4 py-3 text-sm font-semibold text-forest shadow-sm"
+          >
+            <Icon name="star" class="mr-2 inline size-4 text-sun-deep" />
+            Structures de motricité et jeux d'équilibre, sous la surveillance de l'équipe.
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="mt-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center" data-reveal>
+        <p class="flex items-start gap-2 text-[15px] text-ink-soft">
+          <Icon name="image" class="mt-0.5 size-5 shrink-0 text-sage-deep" />
+          Retrouvez le jardin, les jeux et les ateliers en images dans la galerie.
+        </p>
+        <a href="/galerie/" class="btn btn-outline shrink-0">
+          Voir la galerie photo
+          <Icon name="arrow-right" class="size-5" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Venez respirer l'air du jardin"
+    text="La plus belle façon de découvrir l'environnement d'Air Kids, c'est encore de le parcourir en famille."
+  />
+</BaseLayout>

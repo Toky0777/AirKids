@@ -1,0 +1,135 @@
+---
+/**
+ * Éléments décoratifs dessinés à la main (SVG en ligne).
+ * Toujours purement décoratifs : masqués aux lecteurs d'écran.
+ *
+ * kinds : sun | cloud | rainbow | star | leaf | flower | blob | squiggle | dots | wave
+ */
+interface Props {
+  kind:
+    | "sun"
+    | "cloud"
+    | "rainbow"
+    | "star"
+    | "leaf"
+    | "flower"
+    | "blob"
+    | "squiggle"
+    | "dots"
+    | "wave";
+  class?: string;
+}
+
+const { kind, class: className = "" } = Astro.props;
+---
+
+{kind === "sun" && (
+  <svg viewBox="0 0 72 72" fill="none" class={className} aria-hidden="true" focusable="false">
+    <circle cx="36" cy="36" r="12" fill="currentColor" />
+    <g stroke="currentColor" stroke-width="5" stroke-linecap="round">
+      <path d="M36 8v8" />
+      <path d="M36 56v8" />
+      <path d="M8 36h8" />
+      <path d="M56 36h8" />
+      <path d="M16.2 16.2l5.7 5.7" />
+      <path d="M50.1 50.1l5.7 5.7" />
+      <path d="M16.2 55.8l5.7-5.7" />
+      <path d="M50.1 21.9l5.7-5.7" />
+    </g>
+  </svg>
+)}
+
+{kind === "cloud" && (
+  <svg viewBox="0 0 96 50" class={className} aria-hidden="true" focusable="false">
+    <g fill="currentColor">
+      <circle cx="30" cy="28" r="14" />
+      <circle cx="54" cy="20" r="18" />
+      <circle cx="74" cy="30" r="12" />
+      <rect x="22" y="28" width="58" height="14" rx="7" />
+    </g>
+  </svg>
+)}
+
+{kind === "rainbow" && (
+  <svg viewBox="0 0 124 66" fill="none" class={className} aria-hidden="true" focusable="false">
+    <g stroke-width="9" stroke-linecap="round">
+      <path d="M10 62a52 52 0 0 1 104 0" stroke="#FF8A75" />
+      <path d="M22 62a40 40 0 0 1 80 0" stroke="#FFD166" />
+      <path d="M34 62a28 28 0 0 1 56 0" stroke="#78A96B" />
+      <path d="M46 62a16 16 0 0 1 32 0" stroke="#7CC8E8" />
+    </g>
+  </svg>
+)}
+
+{kind === "star" && (
+  <svg viewBox="0 0 48 48" class={className} aria-hidden="true" focusable="false">
+    <path
+      d="M24 3c2.8 9.8 6.9 14.2 17 17-10.1 2.8-14.2 7.2-17 17-2.8-9.8-6.9-14.2-17-17 10.1-2.8 14.2-7.2 17-17z"
+      fill="currentColor"></path>
+  </svg>
+)}
+
+{kind === "leaf" && (
+  <svg viewBox="0 0 64 64" fill="none" class={className} aria-hidden="true" focusable="false">
+    <path
+      d="M52 10C30 12 14 24 12 42c0 4 1 8 3 11 5-16 16-28 33-33-11 8-19 19-24 32 4 2 8 3 12 3 14 0 20-18 16-45z"
+      fill="currentColor"></path>
+  </svg>
+)}
+
+{kind === "flower" && (
+  <svg viewBox="0 0 64 64" class={className} aria-hidden="true" focusable="false">
+    <g fill="currentColor">
+      <circle cx="32" cy="16" r="10" />
+      <circle cx="19.6" cy="25" r="10" />
+      <circle cx="24.4" cy="39.5" r="10" />
+      <circle cx="39.6" cy="39.5" r="10" />
+      <circle cx="44.4" cy="25" r="10" />
+    </g>
+    <circle cx="32" cy="30" r="7" fill="#FFD166" />
+  </svg>
+)}
+
+{kind === "blob" && (
+  <svg viewBox="0 0 200 200" class={className} aria-hidden="true" focusable="false">
+    <path
+      d="M104 10c40-4 76 20 84 56s-18 74-56 90-84 8-102-26S6 62 34 34s30-20 70-24z"
+      fill="currentColor"></path>
+  </svg>
+)}
+
+{kind === "squiggle" && (
+  <svg viewBox="0 0 100 22" fill="none" class={className} aria-hidden="true" focusable="false">
+    <path
+      d="M2 12c8-10 16-10 24 0s16 10 24 0 16-10 24 0 16 10 24 0"
+      stroke="currentColor"
+      stroke-width="5"
+      stroke-linecap="round"></path>
+  </svg>
+)}
+
+{kind === "dots" && (
+  <svg viewBox="0 0 44 44" class={className} aria-hidden="true" focusable="false">
+    <g fill="currentColor">
+      <circle cx="7" cy="9" r="3.2" />
+      <circle cx="27" cy="5" r="2.4" />
+      <circle cx="39" cy="17" r="3.2" />
+      <circle cx="17" cy="24" r="2.4" />
+      <circle cx="32" cy="33" r="3.2" />
+      <circle cx="9" cy="39" r="2.4" />
+    </g>
+  </svg>
+)}
+
+{kind === "wave" && (
+  <svg
+    viewBox="0 0 1440 60"
+    preserveAspectRatio="none"
+    class={className}
+    aria-hidden="true"
+    focusable="false">
+    <path
+      d="M0 34c160-26 320-26 480 0s320 26 480 0 320-26 480 0v26H0z"
+      fill="currentColor"></path>
+  </svg>
+)}

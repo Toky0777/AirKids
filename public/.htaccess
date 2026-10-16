@@ -1,0 +1,28 @@
+# Air Kids Madagascar — configuration Apache (hébergement classique).
+# Redirections 301 des anciennes URLs, page 404 et cache des ressources.
+
+Options -MultiViews
+RewriteEngine On
+
+RewriteRule ^index\.html$ / [R=301,L]
+RewriteRule ^philosophie\.html$ /notre-pedagogie/ [R=301,L]
+RewriteRule ^infrastructure\.html$ /notre-environnement/ [R=301,L]
+RewriteRule ^activites\.html$ /nos-services/ [R=301,L]
+RewriteRule ^atelier\.html$ /nos-services/ [R=301,L]
+RewriteRule ^organisation\.html$ /nos-services/ [R=301,L]
+RewriteRule ^gallery\.html$ /galerie/ [R=301,L]
+RewriteRule ^contact\.html$ /contact/ [R=301,L]
+RewriteRule ^document\.html$ /contact/ [R=301,L]
+
+ErrorDocument 404 /404.html
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  <FilesMatch "\.(js|css|woff2|webp|avif|jpg|jpeg|png|svg|ico)$">
+    ExpiresDefault "access plus 1 year"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>

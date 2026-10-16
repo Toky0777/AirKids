@@ -1,0 +1,46 @@
+---
+/** En-tête des pages intérieures : fil d'Ariane, label, titre et introduction. */
+import Doodle from "@/components/Doodle.astro";
+import Icon from "@/components/Icon.astro";
+import type { IconName } from "@/components/icon-map";
+
+interface Props {
+  eyebrow: string;
+  eyebrowIcon?: IconName;
+  title: string;
+  intro: string;
+  breadcrumb: string;
+}
+
+const { eyebrow, eyebrowIcon = "sparkles", title, intro, breadcrumb } = Astro.props;
+---
+
+<section class="relative overflow-hidden pb-4 pt-10 sm:pt-14">
+  <Doodle
+    kind="blob"
+    class="absolute -right-16 -top-24 h-64 w-64 text-sun/25 sm:h-80 sm:w-80"
+  />
+  <Doodle kind="cloud" class="absolute left-6 top-10 hidden h-8 w-16 text-sky/60 sm:block" />
+  <Doodle kind="star" class="absolute right-1/4 top-16 hidden h-6 w-6 text-coral sm:block" />
+
+  <div class="container-x relative">
+    <nav aria-label="Fil d'Ariane" class="text-sm font-semibold text-ink-soft">
+      <ol class="flex flex-wrap items-center gap-2">
+        <li><a href="/" class="underline-offset-4 hover:text-forest hover:underline">Accueil</a></li>
+        <li aria-hidden="true" class="text-ink/30">›</li>
+        <li><span aria-current="page" class="text-forest">{breadcrumb}</span></li>
+      </ol>
+    </nav>
+
+    <p class="eyebrow mt-8">
+      <Icon name={eyebrowIcon} class="size-4" />
+      {eyebrow}
+    </p>
+
+    <h1 class="mt-5 max-w-3xl text-[2.1rem] leading-[1.06] sm:text-5xl lg:text-[3.4rem]">
+      {title}
+    </h1>
+
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">{intro}</p>
+  </div>
+</section>

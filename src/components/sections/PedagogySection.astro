@@ -1,0 +1,106 @@
+---
+/** Section 5 — Notre pédagogie : approche centrée sur l'enfant. */
+import { Image } from "astro:assets";
+import Doodle from "@/components/Doodle.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import type { IconName } from "@/components/icon-map";
+import atelierPhoto from "@/assets/images/atelier-classe.jpg";
+import constructionPhoto from "@/assets/images/jeux-construction.jpg";
+
+const pillars: Array<{ icon: IconName; title: string; text: string }> = [
+  {
+    icon: "graduation-cap",
+    title: "Programme éducatif français",
+    text: "L'enseignement est dispensé en français, dans la continuité d'un programme éducatif français.",
+  },
+  {
+    icon: "puzzle",
+    title: "Apprentissage ludique et différencié",
+    text: "Des activités adaptées à chaque enfant, avec un matériel pédagogique approprié.",
+  },
+  {
+    icon: "hand-heart",
+    title: "Éveil sensoriel et vie pratique",
+    text: "Exercices de vie pratique et sensorielle, apprentissage de la courtoisie et du respect des autres.",
+  },
+  {
+    icon: "music",
+    title: "Expression artistique et corporelle",
+    text: "Musique, chant, danse, dessin et peinture : le développement artistique tient une place importante.",
+  },
+];
+---
+
+<section class="section-pad">
+  <div class="container-x grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+    <div>
+      <SectionHeading
+        eyebrow="Notre pédagogie"
+        eyebrowIcon="heart"
+        title="Grandir à son rythme, apprendre avec plaisir"
+        intro="Une pédagogie centrée sur l'enfant : l'apprentissage ludique, l'éveil sensoriel, les activités artistiques et la vie collective."
+      />
+
+      <ul class="mt-9 space-y-5">
+        {
+          pillars.map((pillar, index) => (
+            <li
+              class="flex gap-4 rounded-2xl bg-white p-5 shadow-sm"
+              data-reveal
+              style={`--reveal-delay: ${index * 80}ms`}
+            >
+              <span class="icon-chip size-12 bg-cream text-forest">
+                <Icon name={pillar.icon} class="size-6" />
+              </span>
+              <span>
+                <h3 class="font-display text-lg font-semibold text-forest">{pillar.title}</h3>
+                <p class="mt-1 text-[15px] leading-relaxed text-ink-soft">{pillar.text}</p>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <a href="/notre-pedagogie/" class="link-more mt-8" data-reveal>
+        Découvrir notre pédagogie
+        <Icon name="arrow-right" class="size-4" />
+      </a>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-lg lg:max-w-none" data-reveal>
+      <Doodle
+        kind="blob"
+        class="absolute -right-4 -top-8 h-40 w-40 text-sun/30 sm:-right-12 sm:-top-10 sm:h-56 sm:w-56"
+      />
+
+      <div class="relative overflow-hidden rounded-[2.5rem] border-[6px] border-white shadow-soft">
+        <Image
+          src={atelierPhoto}
+          alt="Des enfants participent à un atelier en classe, autour d'une table colorée, accompagnés d'une éducatrice"
+          widths={[420, 620, 800]}
+          sizes="(min-width: 1024px) 42vw, 92vw"
+          loading="lazy"
+          decoding="async"
+          class="aspect-[4/3] w-full object-cover"
+        />
+      </div>
+
+      <figure
+        class="absolute -bottom-8 -left-2 w-36 rotate-[-3deg] overflow-hidden rounded-2xl border-4 border-white shadow-card sm:w-44"
+      >
+        <Image
+          src={constructionPhoto}
+          alt="Une enfant assemble des pièces de construction colorées dans un espace de jeu"
+          widths={[200, 300]}
+          sizes="180px"
+          loading="lazy"
+          decoding="async"
+          class="aspect-[4/3] w-full object-cover"
+        />
+      </figure>
+
+      <Doodle kind="flower" class="absolute -top-6 right-6 h-10 w-10 text-coral sm:h-12 sm:w-12 animate-sway" />
+    </div>
+  </div>
+</section>

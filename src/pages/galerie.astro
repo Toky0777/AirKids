@@ -1,0 +1,79 @@
+---
+/**
+ * Galerie photo : mosaïque complète + visionneuse accessible (îlot React).
+ * Les vignettes et les versions agrandies sont générées à la compilation.
+ * À VALIDER : autorisations de diffusion des photos d'enfants (voir README.md).
+ */
+import { getImage } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Icon from "@/components/Icon.astro";
+import GalleryLightbox from "@/components/react/GalleryLightbox";
+import { galleryItems } from "@/data/gallery";
+
+const title = "Galerie photo : la vie de l'école en images | Air Kids Madagascar";
+const description =
+  "Parcourez les espaces d'Air Kids à Ankerana en images : jardins et mini-potager, salles de classe, ateliers, aires de jeux, spectacles et grands moments de l'école.";
+
+const photos = await Promise.all(
+  galleryItems.map(async (item) => {
+    const [thumb, full] = await Promise.all([
+      getImage({ src: item.image, width: 520, format: "webp" }),
+      getImage({ src: item.image, width: 1400, format: "webp" }),
+    ]);
+
+    return {
+      id: item.id,
+      thumb: thumb.src,
+      full: full.src,
+      width: item.image.width,
+      height: item.image.height,
+      alt: item.alt,
+    };
+  }),
+);
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    breadcrumb="Galerie"
+    eyebrow="Galerie photo"
+    eyebrowIcon="image"
+    title="La vie d'Air Kids en images"
+    intro="Les espaces, les ateliers, le jardin et les grands moments de l'école : parcourez la galerie comme si vous y étiez."
+  />
+
+  <section class="section-pad">
+    <div class="container-x">
+      <p
+        class="mb-8 flex flex-col gap-3 rounded-2xl bg-white px-5 py-4 text-[15px] text-ink-soft shadow-sm sm:flex-row sm:items-center sm:justify-between"
+        data-reveal
+      >
+        <span class="flex items-start gap-2">
+          <Icon name="image" class="mt-0.5 size-5 shrink-0 text-sage-deep" />
+          <span>
+            <span class="font-bold text-forest">Cliquez sur une photo</span> pour l'agrandir.
+            Dans la visionneuse, les flèches du clavier permettent de naviguer et la touche
+            Échap de fermer.
+          </span>
+        </span>
+        <span class="shrink-0 text-sm font-semibold text-ink-soft/90">
+          {photos.length} photos
+        </span>
+      </p>
+
+      <GalleryLightbox client:visible photos={photos} />
+
+      <p class="mt-10 text-sm text-ink-soft/90" data-reveal>
+        Les photographies présentées proviennent de l'établissement. Les enfants y sont
+        montrés sans être identifiés par leur nom.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Une photo vaut mille mots, une visite vaut mille photos"
+    text="Réservez un moment en famille pour découvrir l'école en vrai : les espaces, l'équipe et l'ambiance du quotidien."
+  />
+</BaseLayout>

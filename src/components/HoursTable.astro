@@ -1,0 +1,55 @@
+---
+/** Tableaux d'horaires accessibles (en-têtes de colonnes, légende, défilement local). */
+import Icon from "@/components/Icon.astro";
+import { hoursNote, hoursTables } from "@/data/hours";
+---
+
+<div class="grid gap-6 lg:grid-cols-2">
+  {
+    hoursTables.map((table, index) => (
+      <div class="card-soft min-w-0 p-5 sm:p-6" data-reveal style={`--reveal-delay: ${index * 70}ms`}>
+        <h3 class="font-display text-xl font-semibold text-forest">{table.title}</h3>
+        <div class="mt-4 overflow-x-auto">
+          <table class="w-full min-w-[28rem] border-collapse text-left text-[15px]">
+            <caption class="sr-only">Horaires — {table.title}</caption>
+            <thead>
+              <tr>
+                <th
+                  scope="col"
+                  class="pb-3 pr-4 text-xs font-bold uppercase tracking-wide text-ink-soft"
+                >
+                  Jour
+                </th>
+                {table.columns.map((column) => (
+                  <th
+                    scope="col"
+                    class="pb-3 pr-4 text-xs font-bold uppercase tracking-wide text-ink-soft"
+                  >
+                    {column}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {table.rows.map((row) => (
+                <tr class="border-t border-ink/10">
+                  <th scope="row" class="py-3 pr-4 align-top font-bold text-forest">
+                    {row.day}
+                  </th>
+                  {row.cells.map((cell) => (
+                    <td class="py-3 pr-4 align-top text-ink-soft">{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<p class="mt-6 flex items-start gap-2 rounded-2xl bg-sun/20 px-4 py-3 text-sm text-ink-soft">
+  <Icon name="info" class="mt-0.5 size-4 shrink-0 text-sun-deep" />
+  <span>{hoursNote}</span>
+</p>

@@ -1,0 +1,243 @@
+---
+/** Notre école : présentation, équipe, hygiène et sécurité, chiffres clés. */
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import Icon from "@/components/Icon.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Doodle from "@/components/Doodle.astro";
+import type { IconName } from "@/components/icon-map";
+import facadePhoto from "@/assets/images/batiment-facade.jpg";
+import toutPetitsPhoto from "@/assets/images/espace-tout-petits.jpg";
+import salleDeBainPhoto from "@/assets/images/galerie-08.jpg";
+import dortoirPhoto from "@/assets/images/galerie-09.jpg";
+
+const title = "Notre école — crèche et maternelle à Ankerana | Air Kids Madagascar";
+const description =
+  "Découvrez Air Kids Madagascar : un établissement d'éducation préscolaire à Ankerana (Antananarivo) réunissant crèche, maternelle et garderie sur un espace vert de 2 000 m².";
+
+const keyFigures = [
+  { icon: "leaf", value: "2 000 m²", label: "d'espaces verts, jardin et potager" },
+  { icon: "baby", value: "3 – 24 mois", label: "à la crèche (nursery et trotteurs)" },
+  { icon: "blocks", value: "2 – 6 ans", label: "en maternelle et préscolaire" },
+  { icon: "clock", value: "Lun. – Ven.", label: "avec accueil en garderie" },
+] as const;
+
+const hygienePoints = [
+  "Une salle de bain et des toilettes adaptées à la taille des enfants",
+  "Des produits d'hygiène choisis les plus naturels possible",
+  "Un nettoyage des locaux et des toilettes effectué plusieurs fois par jour",
+  "Un espace intérieur entièrement sécurisé et aménagé pour les enfants",
+  "Les adultes se déchaussent pour entrer dans les salles de classe",
+] as const;
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    breadcrumb="Notre école"
+    eyebrow="Notre école"
+    eyebrowIcon="school"
+    title="Un établissement d'éducation préscolaire, pensé pour les tout-petits"
+    intro="Air Kids réunit une crèche, une maternelle et une garderie à Ankerana, dans un cadre verdoyant où l'apprentissage commence dès les espaces extérieurs."
+  />
+
+  <section class="section-pad">
+    <div class="container-x grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div class="relative" data-reveal>
+        <Doodle kind="blob" class="absolute -left-10 -top-8 h-52 w-52 text-sun/30" />
+        <div class="relative overflow-hidden rounded-[2.5rem] border-[6px] border-white shadow-soft">
+          <Image
+            src={facadePhoto}
+            alt="La façade blanche et verte de l'école d'Air Kids, entourée d'arbres et de verdure"
+            widths={[420, 620, 800]}
+            sizes="(min-width: 1024px) 46vw, 92vw"
+            loading="lazy"
+            decoding="async"
+            class="aspect-[4/3] w-full object-cover"
+          />
+        </div>
+        <figure
+          class="absolute -bottom-8 right-2 w-36 rotate-[3deg] overflow-hidden rounded-2xl border-4 border-white shadow-card sm:w-44"
+        >
+          <Image
+            src={toutPetitsPhoto}
+            alt="Un espace intérieur pour les tout-petits avec une étagère basse, des paniers de jouets et des tapis colorés"
+            widths={[200, 300]}
+            sizes="180px"
+            loading="lazy"
+            decoding="async"
+            class="aspect-[4/3] w-full object-cover"
+          />
+        </figure>
+      </div>
+
+      <div>
+        <SectionHeading
+          eyebrow="Présentation"
+          eyebrowIcon="sun"
+          title="Un petit monde où l'on apprend à grandir"
+        />
+        <div class="mt-6 space-y-5 leading-relaxed text-ink-soft" data-reveal>
+          <p>
+            Air Kids est un établissement d'éducation préscolaire comprenant une
+            <strong class="text-forest">crèche</strong>, une
+            <strong class="text-forest">maternelle</strong> et une
+            <strong class="text-forest">garderie</strong>. L'enseignement est dispensé en
+            français, dans la continuité d'un programme éducatif français.
+          </p>
+          <p>
+            Le projet de l'école s'appuie sur une idée simple : l'enfant s'épanouit dans une
+            relation de confiance et d'échange. L'épanouissement de chacun dans le collectif est
+            recherché au travers d'un apprentissage ludique et différencié, avec un matériel
+            pédagogique approprié.
+          </p>
+          <p>
+            Au quotidien, cela se traduit par des exercices de vie pratique et sensorielle,
+            l'apprentissage de la courtoisie et du respect des autres, l'esprit civique et
+            écologique, et une place importante donnée au développement artistique : musique,
+            chant, danse, dessin.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden bg-forest py-20 sm:py-24">
+    <Doodle kind="blob" class="absolute -right-24 top-0 h-72 w-72 text-forest-deep/60" />
+    <div class="container-x relative">
+      <SectionHeading
+        dark
+        align="center"
+        class="mx-auto items-center text-center"
+        eyebrow="En un coup d'œil"
+        eyebrowIcon="star"
+        title="Air Kids en quelques repères"
+      />
+      <dl class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          keyFigures.map((figure, index) => (
+            <div
+              class="rounded-[1.75rem] bg-cream/5 p-6 text-center ring-1 ring-cream/15"
+              data-reveal
+              style={`--reveal-delay: ${index * 70}ms`}
+            >
+              <Icon name={figure.icon} class="mx-auto size-7 text-sun" />
+              <dt class="sr-only">{figure.label}</dt>
+              <dd class="mt-3 font-display text-2xl font-semibold text-cream">{figure.value}</dd>
+              <dd class="mt-1 text-sm text-cream/80">{figure.label}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class="mt-8 text-center text-sm text-cream/70" data-reveal>
+        Les tranches d'âge et les places disponibles sont confirmées par l'équipe lors de votre
+        demande.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-pad bg-white">
+    <div class="container-x grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <SectionHeading
+          eyebrow="Une équipe qui accompagne"
+          eyebrowIcon="users"
+          title="Des journées encadrées par une équipe professionnelle"
+          intro="Les enfants sont accompagnés tout au long de la journée par une équipe professionnelle, attentive à leur rythme et à leur bien-être."
+        />
+        <ul class="mt-8 space-y-4" data-reveal>
+          {
+            (
+              [
+                {
+                  icon: "heart",
+                  title: "Bienveillance et échange",
+                  text: "L'éveil de l'enfant passe par la relation : écoute, encouragement, respect du rythme de chacun.",
+                },
+                {
+                  icon: "notebook-pen",
+                  title: "Apprentissage structuré",
+                  text: "Des activités pensées selon l'âge, avec un matériel pédagogique adapté et progressif.",
+                },
+                {
+                  icon: "utensils",
+                  title: "Repas et temps calmes",
+                  text: "Repas équilibrés, temps de repos et moments de calme rythment la journée des enfants.",
+                },
+              ] as Array<{ icon: IconName; title: string; text: string }>
+            ).map((item) => (
+              <li class="flex gap-4">
+                <span class="icon-chip bg-cream text-forest">
+                  <Icon name={item.icon} class="size-6" />
+                </span>
+                <span>
+                  <h3 class="font-display text-lg font-semibold text-forest">{item.title}</h3>
+                  <p class="mt-1 text-[15px] leading-relaxed text-ink-soft">{item.text}</p>
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="relative" data-reveal>
+        <div class="overflow-hidden rounded-[2.5rem] border-[6px] border-white shadow-soft">
+          <Image
+            src={dortoirPhoto}
+            alt="L'espace de repos des bébés : un berceau en bois et un fauteuil bleu, dans une chambre calme"
+            widths={[420, 620, 800]}
+            sizes="(min-width: 1024px) 46vw, 92vw"
+            loading="lazy"
+            decoding="async"
+            class="aspect-[4/3] w-full object-cover"
+          />
+        </div>
+        <Doodle kind="flower" class="absolute -right-4 -top-6 h-12 w-12 text-coral animate-sway" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad">
+    <div class="container-x grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <div>
+        <SectionHeading
+          eyebrow="Hygiène et sécurité"
+          eyebrowIcon="shield-check"
+          title="Un cadre propre, sûr et adapté aux enfants"
+        />
+        <p class="mt-6 leading-relaxed text-ink-soft" data-reveal>
+          L'apprentissage de la propreté fait partie de l'éveil de l'enfant. Les espaces sont
+          pensés pour que les tout-petits évoluent en confiance, avec des adultes attentifs.
+        </p>
+        <div class="mt-8 overflow-hidden rounded-[2rem] border-[6px] border-white shadow-soft" data-reveal>
+          <Image
+            src={salleDeBainPhoto}
+            alt="La salle de bain des tout-petits : baignoire, lavabo, pots alignés et serviettes jaunes"
+            widths={[420, 620, 800]}
+            sizes="(min-width: 1024px) 42vw, 92vw"
+            loading="lazy"
+            decoding="async"
+            class="aspect-[4/3] w-full object-cover"
+          />
+        </div>
+      </div>
+
+      <ul class="space-y-3 lg:pt-24" data-reveal>
+        {
+          hygienePoints.map((point) => (
+            <li class="flex items-start gap-3 rounded-2xl bg-white px-5 py-4 shadow-sm">
+              <Icon name="circle-check" class="mt-0.5 size-5 shrink-0 text-sage-deep" />
+              <span class="text-[15px] text-ink-soft">{point}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Envie de découvrir l'école en vrai ?"
+    text="Prenez rendez-vous : nous serons heureux de vous faire visiter les espaces et de répondre à vos questions."
+  />
+</BaseLayout>

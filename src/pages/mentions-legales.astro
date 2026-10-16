@@ -1,0 +1,95 @@
+---
+/**
+ * Mentions légales — page d'information juridique.
+ * L'identité de l'hébergeur reste à compléter par la direction lors de la
+ * mise en ligne (voir README.md) : la page le signale explicitement.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import Icon from "@/components/Icon.astro";
+import { site } from "@/data/site";
+
+const title = "Mentions légales | Air Kids Madagascar";
+const description =
+  "Mentions légales du site d'Air Kids Madagascar : éditeur, responsabilité de publication, propriété intellectuelle, photographies et données personnelles.";
+
+const sections = [
+  {
+    title: "Éditeur du site",
+    body: [
+      `Le site airkids-mada.com est édité par ${site.name}, établissement d'éducation préscolaire (crèche, maternelle, garderie).`,
+      `Adresse : ${site.address.street}, ${site.address.city} ${site.address.postalCode}, ${site.address.country}.`,
+      `Téléphone : ${site.phone.display} — E-mail : ${site.emails.primary}`,
+    ],
+  },
+  {
+    title: "Direction de la publication",
+    body: [
+      "La direction de la publication est assurée par la direction de l'établissement.",
+      `Pour toute question relative au site : ${site.emails.direction}`,
+    ],
+  },
+  {
+    title: "Propriété intellectuelle",
+    body: [
+      "L'ensemble des contenus de ce site (textes, photographies, logo) est la propriété d'Air Kids Madagascar, sauf mention contraire. Toute reproduction ou utilisation sans autorisation écrite est interdite.",
+      "Les photographies publiées montrent les enfants et les espaces de l'école sans identification nominative, avec l'accord de l'établissement.",
+    ],
+  },
+  {
+    title: "Données personnelles et cookies",
+    body: [
+      "Le site ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience tiers. Les polices de caractères sont hébergées localement : aucune requête n'est envoyée à des services externes lors de votre visite.",
+      "Le lien d'itinéraire ouvre Google Maps dans un nouvel onglet, uniquement après votre clic.",
+      "Le traitement des données transmises via le formulaire de contact est décrit dans la politique de confidentialité.",
+    ],
+  },
+] as const;
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    breadcrumb="Mentions légales"
+    eyebrow="Informations légales"
+    eyebrowIcon="info"
+    title="Mentions légales"
+    intro="Informations relatives à l'éditeur du site, à la propriété intellectuelle et au traitement des données."
+  />
+
+  <section class="section-pad">
+    <div class="container-x max-w-3xl space-y-6">
+      {
+        sections.map((section, index) => (
+          <div class="card-soft p-6 sm:p-8" data-reveal style={`--reveal-delay: ${index * 60}ms`}>
+            <h2 class="font-display text-2xl font-semibold text-forest">{section.title}</h2>
+            <div class="mt-4 space-y-3 leading-relaxed text-ink-soft">
+              {section.body.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {section.title === "Données personnelles et cookies" && (
+                <p>
+                  <a href="/confidentialite/" class="link-more">
+                    Lire la politique de confidentialité
+                    <Icon name="arrow-right" class="size-4" />
+                  </a>
+                </p>
+              )}
+            </div>
+          </div>
+        ))
+      }
+
+      <div
+        class="flex items-start gap-3 rounded-2xl border-2 border-sun-deep/40 bg-sun/20 px-5 py-4 text-[15px] text-ink-soft"
+        data-reveal
+      >
+        <Icon name="circle-alert" class="mt-0.5 size-5 shrink-0 text-sun-deep" />
+        <p>
+          <span class="font-bold text-ink">Mention à finaliser avant la mise en ligne :</span>
+          les coordonnées de l'hébergeur du site (nom, adresse, contact) seront ajoutées ici
+          par l'établissement au moment de la publication définitive.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,81 @@
+---
+/**
+ * Appel à l'action final : panneau vert forêt, illustrations et deux actions.
+ * Réutilisé en bas de chaque page pour garder un parcours de conversion clair.
+ */
+import Doodle from "@/components/Doodle.astro";
+import Icon from "@/components/Icon.astro";
+import { site } from "@/data/site";
+import bubbleLeft from "@/assets/images/cour-jeux-enfants.jpg";
+import bubbleRight from "@/assets/images/sensoriel-formes.jpg";
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = "Et si les prochaines belles découvertes commençaient ici ?",
+  text = "Découvrez l'univers d'Air Kids et échangeons ensemble sur les besoins de votre enfant.",
+} = Astro.props;
+---
+
+<section class="section-pad bg-cream">
+  <div class="container-x">
+    <div
+      class="relative overflow-hidden rounded-[2.5rem] bg-forest px-6 py-14 text-center sm:px-12 sm:py-16 lg:px-20"
+      data-reveal
+    >
+      <Doodle kind="blob" class="absolute -left-20 -top-24 h-64 w-64 text-forest-deep/70" />
+      <Doodle kind="blob" class="absolute -bottom-28 -right-16 h-72 w-72 text-forest-deep/60" />
+      <Doodle kind="rainbow" class="absolute -top-2 right-8 hidden h-14 w-28 sm:block" />
+      <Doodle kind="star" class="absolute left-10 top-10 hidden h-6 w-6 text-sun sm:block" />
+      <Doodle kind="cloud" class="absolute bottom-8 left-8 hidden h-7 w-14 text-cream/30 lg:block" />
+
+      <div class="relative mx-auto max-w-2xl">
+        <img
+          src={bubbleLeft.src}
+          alt=""
+          width="120"
+          height="120"
+          loading="lazy"
+          decoding="async"
+          class="mx-auto mb-6 size-20 rounded-full border-4 border-cream/30 object-cover sm:absolute sm:-left-40 sm:top-0 sm:mb-0 sm:size-28"
+        />
+        <img
+          src={bubbleRight.src}
+          alt=""
+          width="120"
+          height="120"
+          loading="lazy"
+          decoding="async"
+          class="mx-auto mb-6 size-20 rounded-full border-4 border-cream/30 object-cover sm:absolute sm:-right-36 sm:-bottom-4 sm:mb-0 sm:size-24"
+        />
+
+        <h2 class="text-3xl text-cream sm:text-4xl lg:text-[2.6rem]">{title}</h2>
+        <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-cream/85">{text}</p>
+
+        <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a href="/contact/" class="btn btn-sun w-full sm:w-auto">
+            <Icon name="message-circle" class="size-5" />
+            Demander des renseignements
+          </a>
+          <a href="/contact/#visite" class="btn btn-ghost-light w-full sm:w-auto">
+            <Icon name="calendar-check" class="size-5" />
+            Préparer une visite
+          </a>
+        </div>
+
+        <p class="mt-7 text-sm text-cream/70">
+          Ou appelez-nous directement :
+          <a
+            href={site.phone.href}
+            class="font-bold text-sun underline decoration-sun/50 decoration-2 underline-offset-4 hover:decoration-sun"
+          >
+            {site.phone.display}
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

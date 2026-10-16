@@ -1,0 +1,13 @@
+# Redirections 301 des anciennes URLs du site vers la nouvelle architecture.
+# Pris en charge par Netlify, Cloudflare Pages et services compatibles.
+# (Apache : voir public/.htaccess — Nginx : voir README.md.)
+
+/index.html            /                         301
+/philosophie.html      /notre-pedagogie/         301
+/infrastructure.html   /notre-environnement/     301
+/activites.html        /nos-services/            301
+/atelier.html          /nos-services/            301
+/organisation.html     /nos-services/            301
+/gallery.html          /galerie/                 301
+/contact.html          /contact/                 301
+/document.html         /contact/                 301

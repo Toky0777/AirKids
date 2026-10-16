@@ -1,0 +1,78 @@
+---
+/** Carte de service — deux variantes : mise en avant (photo) ou compacte. */
+import { Image } from "astro:assets";
+import Icon from "@/components/Icon.astro";
+import { serviceAccentStyles, type Service } from "@/data/services";
+
+interface Props {
+  service: Service;
+  variant?: "feature" | "compact";
+  delay?: number;
+}
+
+const { service, variant = "feature", delay = 0 } = Astro.props;
+const accent = serviceAccentStyles[service.accent];
+---
+
+{
+  variant === "feature" ? (
+    <article
+      class:list={[
+        "group flex h-full flex-col overflow-hidden rounded-[1.75rem] bg-white shadow-card ring-4 ring-transparent transition-transform duration-300 hover:-translate-y-1",
+        accent.ring,
+      ]}
+      data-reveal
+      style={`--reveal-delay: ${delay}ms`}
+    >
+      <div class="relative">
+        <Image
+          src={service.image}
+          alt={service.imageAlt}
+          widths={[420, 620, 820]}
+          sizes="(min-width: 1024px) 40vw, (min-width: 640px) 46vw, 92vw"
+          loading="lazy"
+          decoding="async"
+          class="aspect-[16/10] w-full object-cover"
+        />
+        <span
+          class:list={[
+            "absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-xs font-bold uppercase tracking-wide shadow-sm",
+            accent.chip,
+          ]}
+        >
+          <Icon name={service.icon} class="size-3.5" />
+          {service.ages ?? service.tagline}
+        </span>
+      </div>
+
+      <div class="flex flex-1 flex-col p-6">
+        <h3 class="font-display text-2xl font-semibold text-forest">{service.name}</h3>
+        <p class="mt-3 flex-1 leading-relaxed text-ink-soft">{service.summary}</p>
+        <a href={`/nos-services/#${service.anchor}`} class="link-more mt-5 self-start">
+          Découvrir le service
+          <Icon name="arrow-right" class="size-4" />
+        </a>
+      </div>
+    </article>
+  ) : (
+    <article
+      class:list={[
+        "group flex h-full flex-col rounded-[1.75rem] bg-white p-6 shadow-card ring-4 ring-transparent transition-transform duration-300 hover:-translate-y-1",
+        accent.ring,
+      ]}
+      data-reveal
+      style={`--reveal-delay: ${delay}ms`}
+    >
+      <div class:list={["icon-chip", accent.icon]}>
+        <Icon name={service.icon} class="size-6" />
+      </div>
+      <h3 class="mt-4 font-display text-xl font-semibold text-forest">{service.name}</h3>
+      {service.ages && <p class="mt-1 text-sm font-bold text-ink-soft">{service.ages}</p>}
+      <p class="mt-3 flex-1 text-[15px] leading-relaxed text-ink-soft">{service.summary}</p>
+      <a href={`/nos-services/#${service.anchor}`} class="link-more mt-5 self-start">
+        En savoir plus
+        <Icon name="arrow-right" class="size-4" />
+      </a>
+    </article>
+  )
+}

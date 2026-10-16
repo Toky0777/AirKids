@@ -1,0 +1,124 @@
+---
+/** Section 1 — Hero : promesse de marque, actions et composition photo. */
+import { Image } from "astro:assets";
+import Doodle from "@/components/Doodle.astro";
+import Icon from "@/components/Icon.astro";
+import heroPhoto from "@/assets/images/hero-tout-petits-jardin.jpg";
+import smallPhoto from "@/assets/images/sensoriel-formes.jpg";
+
+const facts = [
+  { icon: "baby", label: "De 3 mois à 6 ans", detail: "crèche & préscolaire" },
+  { icon: "leaf", label: "2 000 m² d'espaces verts", detail: "jardin & mini-potager" },
+  { icon: "graduation-cap", label: "Programme éducatif français", detail: "enseignement en français" },
+] as const;
+---
+
+<section class="relative overflow-hidden pb-14 pt-8 sm:pt-12 lg:pb-20">
+  <Doodle
+    kind="blob"
+    class="absolute -left-24 top-10 h-72 w-72 text-sage/25 sm:h-96 sm:w-96"
+  />
+  <Doodle kind="sun" class="absolute right-6 top-8 hidden h-16 w-16 text-sun sm:block animate-sway" />
+  <Doodle kind="cloud" class="absolute left-1/2 top-4 hidden h-8 w-16 text-sky/70 lg:block" />
+  <Doodle kind="star" class="absolute left-8 top-1/2 hidden h-6 w-6 text-coral lg:block" />
+
+  <div class="container-x relative grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
+    <div class="max-w-xl">
+      <p class="eyebrow">
+        <Icon name="sun" class="size-4 text-sun-deep" />
+        Air Kids Madagascar · Ankerana, Antananarivo
+      </p>
+
+      <h1 class="mt-6 text-[2.4rem] leading-[1.04] sm:text-[3.1rem] lg:text-[3.6rem]">
+        Les premières découvertes,
+        <span class="title-underline">les plus belles aventures.</span>
+      </h1>
+
+      <p class="mt-6 text-lg leading-relaxed text-ink-soft">
+        Un environnement bienveillant où les tout-petits découvrent le monde,
+        développent leur autonomie et grandissent à leur rythme.
+      </p>
+
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href="#bienvenue" class="btn btn-primary">
+          Découvrir Air Kids
+          <Icon name="arrow-down" class="size-5" />
+        </a>
+        <a href="/contact/" class="btn btn-outline">
+          Parlons de votre enfant
+        </a>
+      </div>
+
+      <ul class="mt-10 grid gap-3 sm:grid-cols-3">
+        {
+          facts.map((fact) => (
+            <li class="rounded-2xl bg-white/80 p-3.5 shadow-sm">
+              <Icon name={fact.icon} class="size-5 text-sage-deep" />
+              <p class="mt-2 font-display text-[0.95rem] font-semibold leading-snug text-forest">
+                {fact.label}
+              </p>
+              <p class="text-[0.8rem] text-ink-soft">{fact.detail}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-lg lg:max-w-none">
+      <Doodle
+        kind="blob"
+        class="absolute -right-10 -top-8 h-64 w-64 text-sun/30 sm:h-80 sm:w-80"
+      />
+
+      <div
+        class="relative overflow-hidden rounded-b-[2.5rem] rounded-t-[9rem] border-[6px] border-white shadow-soft"
+      >
+        <Image
+          src={heroPhoto}
+          alt="Une éducatrice entourée de tout-petits sur la pelouse de l'école, près d'une bascule verte"
+          widths={[420, 620, 800]}
+          sizes="(min-width: 1024px) 44vw, 92vw"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          class="aspect-[4/3] w-full object-cover sm:aspect-[3/2]"
+        />
+      </div>
+
+      <figure
+        class="absolute -bottom-6 -left-4 w-40 rotate-[-4deg] overflow-hidden rounded-2xl border-4 border-white shadow-card sm:-left-8 sm:w-52"
+      >
+        <Image
+          src={smallPhoto}
+          alt="Une enfant manipule un jeu d'encastrement en bois aux formes colorées"
+          widths={[220, 320]}
+          sizes="200px"
+          loading="lazy"
+          decoding="async"
+          class="aspect-[4/3] w-full object-cover"
+        />
+      </figure>
+
+      <p
+        class="absolute -top-3 left-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 font-display text-sm font-semibold text-forest shadow-card sm:-left-6"
+      >
+        <Icon name="sparkles" class="size-4 text-coral" />
+        Apprendre par le jeu
+      </p>
+
+      <Doodle kind="star" class="absolute -right-2 bottom-8 h-7 w-7 text-coral animate-bob" />
+    </div>
+  </div>
+
+  <div class="container-x relative mt-14 hidden lg:block">
+    <a
+      href="#bienvenue"
+      class="mx-auto flex w-fit flex-col items-center gap-2 text-sm font-bold text-ink-soft transition hover:text-forest"
+    >
+      <span>Découvrir la suite</span>
+      <span class="flex size-11 items-center justify-center rounded-full border-2 border-forest/20">
+        <Icon name="chevron-down" class="size-5 animate-bob" />
+      </span>
+    </a>
+  </div>
+</section>

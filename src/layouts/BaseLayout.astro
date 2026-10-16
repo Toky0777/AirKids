@@ -1,0 +1,118 @@
+---
+/**
+ * Gabarit commun : métadonnées SEO, Open Graph, données structurées,
+ * en-tête, pied de page et animation d'apparition des sections.
+ */
+import "@fontsource-variable/fredoka/wght.css";
+import "@fontsource-variable/nunito-sans/wght.css";
+import "@/styles/global.css";
+
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter.astro";
+import { mainNav } from "@/data/navigation";
+import { site } from "@/data/site";
+import logo from "@/assets/images/logo-air-kids.png";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Image Open Graph (chemin absolu depuis la racine du site). */
+  ogImage?: string;
+  noindex?: boolean;
+  /** Données structurées Schema.org supplémentaires (JSON-LD). */
+  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
+}
+
+const {
+  title,
+  description,
+  ogImage = "/og-image.jpg",
+  noindex = false,
+  structuredData,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImageUrl = new URL(ogImage, Astro.site).href;
+const schemas = structuredData
+  ? Array.isArray(structuredData)
+    ? structuredData
+    : [structuredData]
+  : [];
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#FFF9EE" />
+    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {
+      schemas.map((schema) => (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      ))
+    }
+  </head>
+
+  <body>
+    <SiteHeader
+      client:load
+      pathname={Astro.url.pathname}
+      logoSrc={logo.src}
+      nav={mainNav}
+      phone={site.phone}
+      email={site.emails.primary}
+    />
+
+    <main id="contenu">
+      <slot />
+    </main>
+
+    <SiteFooter />
+
+    <script>
+      // Apparition progressive des sections (respecte prefers-reduced-motion).
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const elements = document.querySelectorAll<HTMLElement>("[data-reveal]");
+
+      if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+        elements.forEach((el) => el.classList.add("is-visible"));
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+        );
+        elements.forEach((el) => observer.observe(el));
+      }
+    </script>
+  </body>
+</html>

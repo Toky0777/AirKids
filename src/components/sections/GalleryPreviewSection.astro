@@ -1,0 +1,53 @@
+---
+/** Section 8 — Aperçu de la galerie : mosaïque éditoriale + lien vers la galerie. */
+import { Image } from "astro:assets";
+import Icon from "@/components/Icon.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import { previewItems } from "@/data/gallery";
+
+const tiltClasses = ["-rotate-1", "rotate-1", "rotate-0", "-rotate-1", "rotate-1", "rotate-0", "-rotate-1", "rotate-1"];
+---
+
+<section class="section-pad">
+  <div class="container-x">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <SectionHeading
+        eyebrow="Galerie photo"
+        eyebrowIcon="image"
+        title="Un aperçu de la vie à Air Kids"
+        intro="Les espaces, les ateliers, le jardin et les grands moments de l'école."
+      />
+      <a href="/galerie/" class="btn btn-outline shrink-0">
+        Voir toute la galerie
+        <Icon name="arrow-right" class="size-5" />
+      </a>
+    </div>
+
+    <ul class="mt-12 columns-2 gap-4 sm:columns-3 lg:columns-4 [&>li]:mb-4">
+      {
+        previewItems.map((item, index) => (
+          <li
+            class:list={[
+              "break-inside-avoid overflow-hidden rounded-2xl shadow-card transition-transform duration-300 hover:scale-[1.02]",
+              tiltClasses[index % tiltClasses.length],
+            ]}
+            data-reveal
+            style={`--reveal-delay: ${(index % 4) * 60}ms`}
+          >
+            <a href="/galerie/" class="block" aria-label={`Voir la photo : ${item.alt}`}>
+              <Image
+                src={item.image}
+                alt={item.alt}
+                widths={[320, 480]}
+                sizes="(min-width: 1024px) 22vw, (min-width: 640px) 30vw, 45vw"
+                loading="lazy"
+                decoding="async"
+                class="w-full object-cover"
+              />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

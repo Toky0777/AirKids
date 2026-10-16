@@ -1,0 +1,86 @@
+---
+/** Section 4 — Pourquoi choisir Air Kids : six points différenciants. */
+import Doodle from "@/components/Doodle.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import type { IconName } from "@/components/icon-map";
+
+const reasons: Array<{
+  icon: IconName;
+  title: string;
+  text: string;
+  color: string;
+}> = [
+  {
+    icon: "compass",
+    title: "Apprendre en explorant",
+    text: "L'enfant découvre, essaie, se trompe et recommence : les apprentissages passent par l'expérimentation et le jeu.",
+    color: "text-sun",
+  },
+  {
+    icon: "leaf",
+    title: "Grandir au contact de la nature",
+    text: "Un espace vert de 2 000 m², un jardin, un mini-potager : la nature accompagne chaque journée.",
+    color: "text-sage",
+  },
+  {
+    icon: "footprints",
+    title: "Développer son autonomie",
+    text: "Vie pratique, rangement, habillage, propreté : chaque pas vers l'autonomie est encouragé.",
+    color: "text-sky",
+  },
+  {
+    icon: "palette",
+    title: "Stimuler les sens et la créativité",
+    text: "Matériel pédagogique adapté, activités artistiques : musique, chant, danse, dessin et peinture.",
+    color: "text-coral",
+  },
+  {
+    icon: "heart-handshake",
+    title: "Apprendre à vivre ensemble",
+    text: "Courtoisie, respect des autres, esprit civique : la vie collective comme terrain d'apprentissage.",
+    color: "text-sun",
+  },
+  {
+    icon: "recycle",
+    title: "Découvrir les gestes écologiques",
+    text: "Matériaux recyclés, respect des végétaux, démarche environnementale : l'écologie se vit au quotidien.",
+    color: "text-sage",
+  },
+];
+---
+
+<section class="relative overflow-hidden bg-forest py-20 sm:py-24 lg:py-28">
+  <Doodle kind="blob" class="absolute -right-24 -top-24 h-72 w-72 text-forest-deep/60" />
+  <Doodle kind="blob" class="absolute -bottom-28 -left-20 h-72 w-72 text-forest-deep/50" />
+  <Doodle kind="rainbow" class="absolute right-10 top-8 hidden h-12 w-24 opacity-80 lg:block" />
+  <Doodle kind="star" class="absolute left-10 bottom-12 hidden h-6 w-6 text-sun lg:block animate-bob" />
+
+  <div class="container-x relative">
+    <SectionHeading
+      dark
+      align="center"
+      eyebrow="Pourquoi Air Kids ?"
+      eyebrowIcon="heart"
+      title="Un cadre pensé pour les tout-petits, une équipe qui les accompagne"
+      intro="Pas de recette miracle : une approche simple, cohérente et appliquée au quotidien, avec les enfants au centre."
+      class="mx-auto items-center text-center"
+    />
+
+    <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        reasons.map((reason, index) => (
+          <li
+            class="rounded-[1.75rem] bg-cream/5 p-6 ring-1 ring-cream/15 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 hover:bg-cream/10"
+            data-reveal
+            style={`--reveal-delay: ${index * 70}ms`}
+          >
+            <Icon name={reason.icon} class={`size-8 ${reason.color}`} />
+            <h3 class="mt-4 font-display text-xl font-semibold text-cream">{reason.title}</h3>
+            <p class="mt-3 text-[15px] leading-relaxed text-cream/80">{reason.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

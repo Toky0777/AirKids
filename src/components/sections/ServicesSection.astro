@@ -1,0 +1,51 @@
+---
+/** Section 3 — Nos services : deux services phares puis trois cartes compactes. */
+import Doodle from "@/components/Doodle.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import ServiceCard from "@/components/ServiceCard.astro";
+import { services } from "@/data/services";
+
+const [creche, maternelle, garderie, ateliers, fetes] = services;
+---
+
+<div class="bg-cream" aria-hidden="true">
+  <Doodle kind="wave" class="block h-8 w-full text-white sm:h-12" />
+</div>
+
+<section id="services" class="bg-white pb-20 pt-12 sm:pt-16 lg:pb-28">
+  <div class="container-x">
+    <SectionHeading
+      eyebrow="Nos services"
+      eyebrowIcon="blocks"
+      title="De la crèche à la maternelle, chaque âge a son espace"
+      intro="Air Kids accompagne les enfants de leurs premiers mois jusqu'à l'entrée à l'école élémentaire, avec une attention particulière portée à leur rythme et à leur bien-être."
+    />
+
+    <div class="mt-12 grid gap-6 lg:grid-cols-2">
+      <ServiceCard service={creche} variant="feature" />
+      <ServiceCard service={maternelle} variant="feature" delay={90} />
+    </div>
+
+    <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <ServiceCard service={garderie} variant="compact" delay={60} />
+      <ServiceCard service={ateliers} variant="compact" delay={120} />
+      <ServiceCard service={fetes} variant="compact" delay={180} />
+    </div>
+
+    <p
+      class="mt-10 flex flex-col items-start gap-3 rounded-2xl bg-cream px-5 py-4 text-[15px] text-ink-soft sm:flex-row sm:items-center sm:justify-between"
+      data-reveal
+    >
+      <span class="flex items-start gap-2">
+        <Icon name="info" class="mt-0.5 size-4 shrink-0 text-sage-deep" />
+        Les tranches d'âge et les places disponibles sont confirmées par l'équipe lors de
+        votre demande.
+      </span>
+      <a href="/nos-services/" class="link-more shrink-0">
+        Voir toutes les informations
+        <Icon name="arrow-right" class="size-4" />
+      </a>
+    </p>
+  </div>
+</section>

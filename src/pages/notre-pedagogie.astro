@@ -1,0 +1,287 @@
+---
+/**
+ * Notre pédagogie : approche centrée sur l'enfant, piliers des apprentissages
+ * et langue d'enseignement. Contenu issu de la page « Philosophie » du site
+ * actuel (voir README.md pour les points à valider).
+ */
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Icon from "@/components/Icon.astro";
+import Doodle from "@/components/Doodle.astro";
+import type { IconName } from "@/components/icon-map";
+import atelierPhoto from "@/assets/images/atelier-classe.jpg";
+import constructionPhoto from "@/assets/images/jeux-construction.jpg";
+import salleClassePhoto from "@/assets/images/salle-classe-maternelle.jpg";
+
+const title = "Notre pédagogie : apprendre par le jeu à Ankerana | Air Kids Madagascar";
+const description =
+  "Découvrez la pédagogie d'Air Kids Madagascar : l'enfant au centre, apprentissage ludique et différencié, éveil sensoriel, vie pratique, arts et vie collective, au sein d'un programme éducatif français.";
+
+const pillars: Array<{ icon: IconName; title: string; text: string }> = [
+  {
+    icon: "footprints",
+    title: "Vie pratique & autonomie",
+    text: "S'habiller, ranger, se servir, mettre la table : les gestes du quotidien sont des apprentissages à part entière, encouragés pas à pas.",
+  },
+  {
+    icon: "sparkles",
+    title: "Éveil sensoriel & motricité",
+    text: "Toucher, transvaser, trier, grimper, s'équilibrer : les sens et le corps sont au cœur des premières découvertes.",
+  },
+  {
+    icon: "book-open",
+    title: "Langage & français",
+    text: "L'enseignement est dispensé en français, dans la continuité d'un programme éducatif français : comptines, contes, échanges et premières traces écrites.",
+  },
+  {
+    icon: "blocks",
+    title: "Manipulation & matériel adapté",
+    text: "Puzzles, encastrements, constructions : un matériel pédagogique approprié accompagne un apprentissage ludique et différencié.",
+  },
+  {
+    icon: "palette",
+    title: "Expression artistique",
+    text: "Musique, chant, danse, dessin et peinture : le développement artistique tient une place importante dans la journée.",
+  },
+  {
+    icon: "heart-handshake",
+    title: "Vivre ensemble & écologie",
+    text: "Courtoisie, respect des autres, esprit civique et écologique : la vie collective est un terrain d'apprentissage quotidien.",
+  },
+];
+
+const dailyTranslations = [
+  {
+    icon: "hand-heart" as IconName,
+    text: "Des exercices de vie pratique et sensorielle, adaptés à chaque âge.",
+  },
+  {
+    icon: "users" as IconName,
+    text: "L'apprentissage de la courtoisie et du respect des autres, à travers les gestes et les mots du quotidien.",
+  },
+  {
+    icon: "recycle" as IconName,
+    text: "L'esprit civique et écologique, au contact du jardin et du mini-potager.",
+  },
+  {
+    icon: "music" as IconName,
+    text: "Un développement artistique valorisé : musique, chant, danse, dessin.",
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    breadcrumb="Notre pédagogie"
+    eyebrow="Notre pédagogie"
+    eyebrowIcon="heart"
+    title="Grandir à son rythme, apprendre avec plaisir"
+    intro="La pédagogie d'Air Kids place l'enfant au centre : il apprend par la découverte, l'expérimentation, le jeu et les interactions avec les autres."
+  />
+
+  <section class="section-pad">
+    <div class="container-x grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div class="relative" data-reveal>
+        <Doodle kind="blob" class="absolute -left-12 -top-10 h-56 w-56 text-sky/25" />
+        <div class="relative overflow-hidden rounded-[2.5rem] border-[6px] border-white shadow-soft">
+          <Image
+            src={atelierPhoto}
+            alt="Des enfants participent à un atelier en classe, autour d'une table colorée, accompagnés d'une éducatrice"
+            widths={[420, 620, 800]}
+            sizes="(min-width: 1024px) 46vw, 92vw"
+            loading="lazy"
+            decoding="async"
+            class="aspect-[4/3] w-full object-cover"
+          />
+        </div>
+        <figure
+          class="absolute -bottom-8 right-2 w-36 rotate-[3deg] overflow-hidden rounded-2xl border-4 border-white shadow-card sm:w-44"
+        >
+          <Image
+            src={constructionPhoto}
+            alt="Une enfant assemble des pièces de construction colorées dans un espace de jeu"
+            widths={[200, 300]}
+            sizes="180px"
+            loading="lazy"
+            decoding="async"
+            class="aspect-[4/3] w-full object-cover"
+          />
+        </figure>
+        <Doodle kind="star" class="absolute -top-5 right-8 h-8 w-8 text-coral animate-bob" />
+      </div>
+
+      <div>
+        <SectionHeading
+          eyebrow="Notre approche"
+          eyebrowIcon="compass"
+          title="Une relation de confiance et d'échange"
+        />
+        <div class="mt-6 space-y-5 leading-relaxed text-ink-soft" data-reveal>
+          <p>
+            Le projet de l'école s'appuie sur une idée simple : l'enfant s'épanouit dans une
+            relation de confiance et d'échange. L'épanouissement de chacun dans le collectif
+            est recherché au travers d'un apprentissage ludique et différencié, avec un
+            matériel pédagogique approprié.
+          </p>
+          <p>
+            L'enfant apprend par la découverte, l'expérimentation, le jeu et les interactions
+            avec les autres. Chaque activité est pensée pour l'éveiller, l'encourager et
+            l'accompagner à son rythme, en petits groupes comme en grand groupe.
+          </p>
+          <p>
+            Cette approche se vit au quotidien : dans la classe, pendant les ateliers, à
+            l'heure du repas, et dès que la journée se poursuit dehors, dans le jardin et le
+            mini-potager de l'école.
+          </p>
+        </div>
+
+        <a href="/notre-environnement/" class="link-more mt-8" data-reveal>
+          Découvrir l'environnement de l'école
+          <Icon name="arrow-right" class="size-4" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white pb-20 pt-16 sm:pt-20 lg:pb-28">
+    <div class="container-x">
+      <SectionHeading
+        align="center"
+        class="mx-auto items-center text-center"
+        eyebrow="Les piliers de nos apprentissages"
+        eyebrowIcon="puzzle"
+        title="Six domaines, un même fil rouge : l'enfant acteur"
+        intro="Les activités s'articulent autour de grands domaines complémentaires, adaptés à l'âge et au rythme de chaque enfant."
+      />
+
+      <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          pillars.map((pillar, index) => (
+            <li
+              class="rounded-[1.75rem] bg-cream p-6 shadow-sm ring-1 ring-ink/5 transition-transform duration-300 hover:-translate-y-1"
+              data-reveal
+              style={`--reveal-delay: ${index * 60}ms`}
+            >
+              <span class="icon-chip bg-white text-forest shadow-sm">
+                <Icon name={pillar.icon} class="size-6" />
+              </span>
+              <h3 class="mt-4 font-display text-xl font-semibold text-forest">{pillar.title}</h3>
+              <p class="mt-3 text-[15px] leading-relaxed text-ink-soft">{pillar.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden bg-forest py-20 sm:py-24">
+    <Doodle kind="blob" class="absolute -left-24 -top-24 h-72 w-72 text-forest-deep/60" />
+    <Doodle kind="star" class="absolute right-12 top-10 hidden h-6 w-6 text-sun lg:block animate-bob" />
+
+    <div class="container-x relative grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+      <div>
+        <SectionHeading
+          dark
+          eyebrow="Au quotidien"
+          eyebrowIcon="sunrise"
+          title="Ce que cela donne, concrètement"
+          intro="Derrière les grands principes, il y a des gestes simples, répétés chaque jour avec bienveillance."
+        />
+
+        <ul class="mt-8 space-y-4">
+          {
+            dailyTranslations.map((item, index) => (
+              <li
+                class="flex items-start gap-4 rounded-2xl bg-cream/5 px-5 py-4 ring-1 ring-cream/15"
+                data-reveal
+                style={`--reveal-delay: ${index * 70}ms`}
+              >
+                <Icon name={item.icon} class="mt-0.5 size-6 shrink-0 text-sun" />
+                <span class="text-[15px] leading-relaxed text-cream/85">{item.text}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="relative" data-reveal>
+        <div class="overflow-hidden rounded-[2.5rem] border-[6px] border-cream/20 shadow-soft">
+          <Image
+            src={salleClassePhoto}
+            alt="Une salle de classe colorée avec des tables multicolores, un tableau et des affiches de lettres et de chiffres"
+            widths={[420, 620, 800]}
+            sizes="(min-width: 1024px) 44vw, 92vw"
+            loading="lazy"
+            decoding="async"
+            class="aspect-[4/3] w-full object-cover"
+          />
+        </div>
+        <figure
+          class="absolute -bottom-7 -left-3 w-32 rotate-[-3deg] overflow-hidden rounded-2xl border-4 border-white shadow-card sm:w-40"
+        >
+          <Image
+            src={constructionPhoto}
+            alt="Des pièces de construction colorées assemblées sur une table"
+            widths={[180, 260]}
+            sizes="160px"
+            loading="lazy"
+            decoding="async"
+            class="aspect-square w-full object-cover"
+          />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad">
+    <div class="container-x">
+      <div class="card-soft grid items-center gap-8 p-6 sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12" data-reveal>
+        <div class="flex flex-col items-start">
+          <span class="icon-chip bg-sun/40 text-ink">
+            <Icon name="graduation-cap" class="size-6" />
+          </span>
+          <h2 class="mt-4 text-2xl sm:text-3xl">Le français au cœur des apprentissages</h2>
+          <p class="mt-4 leading-relaxed text-ink-soft">
+            L'enseignement est dispensé en français, dans la continuité d'un programme
+            éducatif français. Les enfants baignent dans la langue au fil des activités :
+            comptines, histoires, consignes, jeux et échanges avec l'équipe.
+          </p>
+          <p class="mt-4 text-sm text-ink-soft/90">
+            Le contenu exact du programme et son organisation par section sont présentés par
+            l'équipe lors de votre visite.
+          </p>
+          <a href="/contact/#visite" class="link-more mt-6">
+            Préparer votre visite
+            <Icon name="arrow-right" class="size-4" />
+          </a>
+        </div>
+
+        <ul class="grid gap-3 sm:grid-cols-2">
+          {
+            (
+              [
+                { icon: "book-open", text: "Comptines, contes et lectures partagées" },
+                { icon: "message-circle", text: "Échanges et consignes en français" },
+                { icon: "music", text: "Chansons et jeux de langage" },
+                { icon: "notebook-pen", text: "Premières traces écrites en grande section" },
+              ] as Array<{ icon: IconName; text: string }>
+            ).map((item) => (
+              <li class="flex items-start gap-3 rounded-2xl bg-cream px-4 py-3.5 text-[15px] text-ink-soft">
+                <Icon name={item.icon} class="mt-0.5 size-5 shrink-0 text-sage-deep" />
+                <span>{item.text}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Envie de voir la pédagogie en action ?"
+    text="Rien ne remplace une visite : venez observer une matinée à Air Kids et échanger avec l'équipe."
+  />
+</BaseLayout>

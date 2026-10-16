@@ -1,0 +1,72 @@
+---
+/**
+ * Page d'accueil — discovery complète : hero, présentation, services,
+ * différenciants, pédagogie, environnement, journée, galerie, infos
+ * pratiques, FAQ et appel à l'action final.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Hero from "@/components/sections/Hero.astro";
+import Welcome from "@/components/sections/Welcome.astro";
+import ServicesSection from "@/components/sections/ServicesSection.astro";
+import WhySection from "@/components/sections/WhySection.astro";
+import PedagogySection from "@/components/sections/PedagogySection.astro";
+import EnvironmentSection from "@/components/sections/EnvironmentSection.astro";
+import DaySection from "@/components/sections/DaySection.astro";
+import GalleryPreviewSection from "@/components/sections/GalleryPreviewSection.astro";
+import PracticalSection from "@/components/sections/PracticalSection.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import { faqItems } from "@/data/faq";
+import { site } from "@/data/site";
+
+const title = "Crèche et école maternelle à Antananarivo — Air Kids Madagascar";
+const description =
+  "Crèche (3–24 mois), maternelle et préscolaire (2–6 ans), garderie et ateliers à Ankerana, Antananarivo. Un cadre verdoyant de 2 000 m² où les enfants apprennent par le jeu. Demandez une visite.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": ["ChildCare", "Preschool"],
+    name: site.name,
+    alternateName: site.shortName,
+    description: site.description,
+    url: site.url,
+    telephone: site.phone.display,
+    email: site.emails.primary,
+    image: new URL("/og-image.jpg", site.url).href,
+    logo: new URL("/icon-512.png", site.url).href,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.city,
+      postalCode: site.address.postalCode,
+      addressCountry: site.address.countryCode,
+    },
+    areaServed: { "@type": "City", name: "Antananarivo" },
+    knowsLanguage: "fr",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+  <Hero />
+  <Welcome />
+  <ServicesSection />
+  <WhySection />
+  <PedagogySection />
+  <EnvironmentSection />
+  <DaySection />
+  <GalleryPreviewSection />
+  <PracticalSection />
+  <FaqSection />
+  <CtaBand />
+</BaseLayout>

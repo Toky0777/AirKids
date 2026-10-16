@@ -1,0 +1,125 @@
+---
+/** Section 6 — Un environnement qui invite à découvrir : galerie éditoriale. */
+import { Image } from "astro:assets";
+import Doodle from "@/components/Doodle.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import airePhoto from "@/assets/images/aire-de-jeux.jpg";
+import potagerPhoto from "@/assets/images/mini-potager.jpg";
+import clouturePhoto from "@/assets/images/galerie-04.jpg";
+import jardinPhoto from "@/assets/images/galerie-16.jpg";
+import aeriennePhoto from "@/assets/images/vue-aerienne-jardin.jpg";
+---
+
+<section class="bg-white pb-20 pt-16 sm:pt-20 lg:pb-28">
+  <div class="container-x">
+    <SectionHeading
+      eyebrow="Notre environnement"
+      eyebrowIcon="leaf"
+      title="La nature fait aussi partie de la classe"
+      intro="L'école est installée sur un espace vert de 2 000 m². L'apprentissage commence dès les espaces extérieurs : les végétaux sont identifiés par leur nom français, leur nom scientifique et leur utilité."
+    />
+
+    <div class="mt-12 grid gap-5 lg:grid-cols-3">
+      <figure
+        class="relative overflow-hidden rounded-[2rem] shadow-card lg:col-span-2"
+        data-reveal
+      >
+        <Image
+          src={airePhoto}
+          alt="La pelouse de l'école avec une maisonnette, un toboggan, une bascule et le bâtiment principal en arrière-plan"
+          widths={[620, 900, 1200]}
+          sizes="(min-width: 1024px) 62vw, 92vw"
+          loading="lazy"
+          decoding="async"
+          class="h-full w-full object-cover lg:aspect-[16/10]"
+        />
+        <figcaption
+          class="absolute bottom-4 left-4 right-4 flex items-center gap-3 rounded-2xl bg-cream/95 px-4 py-3 text-sm font-semibold text-forest shadow-sm"
+        >
+          <Icon name="sun" class="size-5 shrink-0 text-sun-deep" />
+          Jeux de plein air, motricité et échanges libres sur la pelouse de l'école.
+        </figcaption>
+      </figure>
+
+      <figure class="relative overflow-hidden rounded-[2rem] shadow-card" data-reveal style="--reveal-delay: 80ms">
+        <Image
+          src={potagerPhoto}
+          alt="Le mini-potager de l'école et son panneau en bois, avec de jeunes plants en rangs"
+          widths={[420, 620]}
+          sizes="(min-width: 1024px) 30vw, 92vw"
+          loading="lazy"
+          decoding="async"
+          class="aspect-[4/3] w-full object-cover lg:aspect-[16/10]"
+        />
+        <figcaption class="p-4 text-sm text-ink-soft">
+          <span class="font-display font-semibold text-forest">Le mini-potager.</span> Selon
+          leur âge, les enfants sèment, cultivent, récoltent et cuisinent.
+        </figcaption>
+      </figure>
+
+      <figure class="overflow-hidden rounded-[2rem] bg-cream shadow-card" data-reveal>
+        <Image
+          src={clouturePhoto}
+          alt="Une clôture en bois aux couleurs vives au milieu des plantations du jardin"
+          widths={[420, 620]}
+          sizes="(min-width: 1024px) 30vw, 92vw"
+          loading="lazy"
+          decoding="async"
+          class="aspect-[4/3] w-full object-cover"
+        />
+        <figcaption class="p-4 text-sm text-ink-soft">
+          <span class="font-display font-semibold text-forest">Le jardin.</span> Couleurs,
+          fleurs et plantations accompagnent les promenades.
+        </figcaption>
+      </figure>
+
+      <figure class="overflow-hidden rounded-[2rem] bg-cream shadow-card" data-reveal style="--reveal-delay: 80ms">
+        <Image
+          src={jardinPhoto}
+          alt="Le jardin et ses grands arbres : une table verte et des chaises sur la pelouse"
+          widths={[420, 620]}
+          sizes="(min-width: 1024px) 30vw, 92vw"
+          loading="lazy"
+          decoding="async"
+          class="aspect-[4/3] w-full object-cover"
+        />
+        <figcaption class="p-4 text-sm text-ink-soft">
+          <span class="font-display font-semibold text-forest">Les arbres.</span> Un jardin
+          aéré, des zones d'ombre et des coins calmes.
+        </figcaption>
+      </figure>
+
+      <figure class="relative overflow-hidden rounded-[2rem] shadow-card lg:col-span-3" data-reveal>
+        <Image
+          src={aeriennePhoto}
+          alt="Vue aérienne du jardin de l'école : pelouse, allées, jeux et espaces plantés"
+          widths={[620, 900, 1200]}
+          sizes="92vw"
+          loading="lazy"
+          decoding="async"
+          class="aspect-[16/9] w-full object-cover sm:aspect-[21/9]"
+        />
+        <figcaption
+          class="absolute left-4 top-4 inline-flex items-center gap-2 rounded-2xl bg-sun px-4 py-3 font-display font-semibold text-ink shadow-card sm:left-6 sm:top-6"
+        >
+          <Icon name="leaf" class="size-5" />
+          2 000 m² d'espaces verts à Ankerana
+        </figcaption>
+        <Doodle kind="star" class="absolute bottom-5 right-5 h-7 w-7 text-cream animate-bob" />
+      </figure>
+    </div>
+
+    <div class="mt-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center" data-reveal>
+      <p class="flex items-start gap-2 text-[15px] text-ink-soft">
+        <Icon name="recycle" class="mt-0.5 size-5 shrink-0 text-sage-deep" />
+        Équipements adaptés à la taille des enfants et, dans la mesure du possible, réalisés à
+        partir de matériaux recyclés.
+      </p>
+      <a href="/notre-environnement/" class="link-more shrink-0">
+        Explorer notre environnement
+        <Icon name="arrow-right" class="size-4" />
+      </a>
+    </div>
+  </div>
+</section>

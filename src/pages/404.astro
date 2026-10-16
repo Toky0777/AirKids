@@ -1,0 +1,75 @@
+---
+/**
+ * Page 404 — en dehors de l'arborescence, marquée noindex.
+ * Les serveurs statiques servent automatiquement dist/404.html.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Icon from "@/components/Icon.astro";
+import Doodle from "@/components/Doodle.astro";
+import { site } from "@/data/site";
+
+const title = "Page introuvable | Air Kids Madagascar";
+const description =
+  "La page demandée n'existe pas ou a été déplacée. Retrouvez l'accueil, les services, la galerie et le contact d'Air Kids Madagascar.";
+---
+
+<BaseLayout title={title} description={description} noindex>
+  <section class="relative overflow-hidden pb-20 pt-16 sm:pt-24">
+    <Doodle kind="blob" class="absolute -left-24 -top-24 h-72 w-72 text-sage/25" />
+    <Doodle kind="sun" class="absolute right-10 top-12 hidden h-16 w-16 text-sun sm:block animate-sway" />
+    <Doodle kind="cloud" class="absolute bottom-10 right-1/4 hidden h-8 w-16 text-sky/70 lg:block animate-float" />
+    <Doodle kind="star" class="absolute left-1/4 bottom-16 hidden h-7 w-7 text-coral lg:block animate-bob" />
+
+    <div class="container-x relative max-w-2xl text-center">
+      <p class="font-display text-6xl font-semibold text-forest sm:text-7xl" aria-hidden="true">
+        404
+      </p>
+      <h1 class="mt-4 text-3xl sm:text-4xl">
+        Oups, cette page s'est perdue dans le jardin…
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
+        La page que vous cherchez n'existe pas ou a été déplacée. Pas de panique : tout le
+        reste est bien là.
+      </p>
+
+      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="/" class="btn btn-primary w-full sm:w-auto">
+          <Icon name="home" class="size-5" />
+          Retour à l'accueil
+        </a>
+        <a href="/contact/" class="btn btn-outline w-full sm:w-auto">
+          <Icon name="message-circle" class="size-5" />
+          Nous contacter
+        </a>
+      </div>
+
+      <ul class="mt-12 flex flex-wrap items-center justify-center gap-2.5">
+        {
+          [
+            { href: "/nos-services/", label: "Nos services" },
+            { href: "/notre-pedagogie/", label: "Notre pédagogie" },
+            { href: "/notre-environnement/", label: "Notre environnement" },
+            { href: "/galerie/", label: "Galerie" },
+          ].map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-forest shadow-sm transition hover:bg-sun/60"
+              >
+                {link.label}
+                <Icon name="arrow-right" class="size-4" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="mt-10 text-sm text-ink-soft">
+        Besoin d'aide ? Appelez-nous au
+        <a href={site.phone.href} class="font-bold text-forest underline underline-offset-4">
+          {site.phone.display}
+        </a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

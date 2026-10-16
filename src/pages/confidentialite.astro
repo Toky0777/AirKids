@@ -1,0 +1,129 @@
+---
+/**
+ * Politique de confidentialité — descriptions honnêtes du fonctionnement du
+ * formulaire (mode « courrier » par défaut, mode « envoi direct » si configuré),
+ * de l'absence de cookies et des droits des personnes.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import Icon from "@/components/Icon.astro";
+import { site } from "@/data/site";
+
+const title = "Politique de confidentialité | Air Kids Madagascar";
+const description =
+  "Politique de confidentialité d'Air Kids Madagascar : quelles données sont concernées par le formulaire de contact, pourquoi, combien de temps, et comment exercer vos droits.";
+
+const sections = [
+  {
+    title: "Qui est responsable des données ?",
+    body: [
+      `${site.name} (${site.address.street}, ${site.address.city} ${site.address.postalCode}, ${site.address.country}) est responsable du traitement des informations que vous choisissez de nous transmettre.`,
+      `Pour toute question : ${site.emails.primary} ou ${site.phone.display}.`,
+    ],
+  },
+  {
+    title: "Quelles données sont concernées ?",
+    body: [
+      "Le formulaire de contact vous permet d'indiquer : votre nom, vos coordonnées (e-mail ou téléphone), le service recherché, l'âge de votre enfant (facultatif) et votre message.",
+      "Selon la configuration du site, votre demande est soit transmise par votre propre logiciel de messagerie — dans ce cas, le site n'enregistre rien — soit envoyée directement à l'école par le biais d'un service d'envoi de formulaire.",
+      "Les coordonnées affichées sur le site (téléphone, e-mails) permettent également de nous joindre sans passer par le formulaire.",
+    ],
+  },
+  {
+    title: "Pourquoi et comment ces données sont-elles utilisées ?",
+    body: [
+      "Vos informations servent uniquement à répondre à votre demande : renseignements, visite, inscription ou toute autre question liée à l'accueil de votre enfant.",
+      "Elles ne sont ni cédées, ni louées, ni utilisées à des fins publicitaires. Le formulaire comporte une case de consentement, et seuls les champs nécessaires sont demandés.",
+    ],
+  },
+  {
+    title: "Combien de temps sont-elles conservées ?",
+    body: [
+      "Vos informations sont conservées par l'établissement le temps nécessaire pour traiter votre demande et y donner suite.",
+      "Vous pouvez demander leur suppression à tout moment (voir « Vos droits »).",
+    ],
+  },
+  {
+    title: "Qui peut y accéder ?",
+    body: [
+      "Seule l'équipe de l'établissement en charge des familles accède aux demandes reçues, dans le cadre de son activité.",
+      "Si un service d'envoi de formulaire est utilisé, les données transitent par ce prestataire technique uniquement pour l'acheminement, puis sont transmises à l'école.",
+    ],
+  },
+  {
+    title: "Cookies et services tiers",
+    body: [
+      "Ce site ne dépose aucun cookie, n'utilise aucun outil de mesure d'audience et ne charge aucun contenu tiers automatiquement.",
+      "Les polices de caractères sont hébergées directement sur le site : aucune requête n'est envoyée vers Google Fonts ou un autre service.",
+      "La carte n'est pas intégrée au chargement : le lien d'itinéraire ouvre Google Maps dans un nouvel onglet, seulement si vous cliquez.",
+    ],
+  },
+  {
+    title: "Sécurité",
+    body: [
+      "Le site est statique : il ne stocke lui-même aucune donnée de formulaire.",
+      "Les échanges se font en HTTPS lorsque le site est déployé. L'établissement veille à limiter l'accès aux demandes reçues aux seules personnes concernées.",
+    ],
+  },
+  {
+    title: "Vos droits",
+    body: [
+      `Vous pouvez demander à consulter, corriger ou supprimer les informations vous concernant, ou vous opposer à leur traitement : écrivez à ${site.emails.primary} ou adressez un courrier à l'établissement.`,
+      "Nous répondrons dans les meilleurs délais. Si vous estimez que vos droits ne sont pas respectés, vous pouvez également vous adresser aux autorités compétentes de votre pays de résidence.",
+    ],
+  },
+  {
+    title: "Enfants et photographies",
+    body: [
+      "Le site ne collecte aucune donnée directement auprès des enfants. Les informations transmises le sont par les parents ou les responsables légaux.",
+      "Les photographies publiées ne nomment ni n'identifient les enfants.",
+    ],
+  },
+  {
+    title: "Mises à jour",
+    body: [
+      "Cette politique peut évoluer, notamment si les outils utilisés par l'école changent. La version publiée en ligne prévaut.",
+    ],
+  },
+] as const;
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    breadcrumb="Politique de confidentialité"
+    eyebrow="Confidentialité"
+    eyebrowIcon="shield-check"
+    title="Politique de confidentialité"
+    intro="Comment Air Kids Madagascar utilise les informations que vous choisissez de nous transmettre, et comment exercer vos droits."
+  />
+
+  <section class="section-pad">
+    <div class="container-x max-w-3xl space-y-6">
+      {
+        sections.map((section, index) => (
+          <div class="card-soft p-6 sm:p-8" data-reveal style={`--reveal-delay: ${index * 40}ms`}>
+            <h2 class="font-display text-2xl font-semibold text-forest">{section.title}</h2>
+            <div class="mt-4 space-y-3 leading-relaxed text-ink-soft">
+              {section.body.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+
+      <div
+        class="flex items-start gap-3 rounded-2xl bg-cream px-5 py-4 text-[15px] text-ink-soft"
+        data-reveal
+      >
+        <Icon name="mail" class="mt-0.5 size-5 shrink-0 text-sage-deep" />
+        <p>
+          Une question sur vos données ?
+          <a href={`mailto:${site.emails.primary}`} class="font-bold text-forest underline underline-offset-4">
+            {site.emails.primary}
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,40 @@
+---
+/**
+ * FAQ en accordéons natifs (<details>) : accessibles au clavier sans JavaScript.
+ * L'attribut `name` rend l'ouverture exclusive sur les navigateurs récents.
+ */
+import Icon from "@/components/Icon.astro";
+import { faqItems } from "@/data/faq";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<div
+  class:list={["overflow-hidden rounded-[1.75rem] bg-white shadow-card", className]}
+  data-reveal
+>
+  {
+    faqItems.map((item) => (
+      <details class="group border-b border-ink/8 last:border-b-0" name="faq-airkids">
+        <summary class="flex items-center justify-between gap-4 px-5 py-5 sm:px-7">
+          <h3 class="font-display text-[1.05rem] font-semibold text-forest sm:text-lg">
+            {item.question}
+          </h3>
+          <span
+            class="flex size-9 shrink-0 items-center justify-center rounded-full bg-cream text-forest transition-transform duration-300 group-open:rotate-180 group-open:bg-sun"
+            aria-hidden="true"
+          >
+            <Icon name="chevron-down" class="size-5" />
+          </span>
+        </summary>
+        <div class="px-5 pb-6 sm:px-7 sm:pr-16">
+          <p class="leading-relaxed text-ink-soft">{item.answer}</p>
+        </div>
+      </details>
+    ))
+  }
+</div>

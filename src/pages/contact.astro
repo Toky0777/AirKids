@@ -1,0 +1,224 @@
+---
+/**
+ * Contact : formulaire (îlot React, modes mailto/endpoint honnêtes), préparation
+ * de la visite, informations pratiques et section inscriptions (#visite,
+ * #documents-inscriptions). Les liens vers cette page proviennent de tout le site.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import ContactForm from "@/components/react/ContactForm";
+import Icon from "@/components/Icon.astro";
+import { services } from "@/data/services";
+import { hoursSummary } from "@/data/hours";
+import { site } from "@/data/site";
+
+const title = "Contact et visite : Ankerana, Antananarivo | Air Kids Madagascar";
+const description =
+  "Contactez Air Kids Madagascar : formulaire, téléphone et e-mail pour une demande de renseignements, une visite de l'école ou une inscription en crèche ou maternelle à Ankerana, Antananarivo.";
+
+const serviceOptions = [
+  ...services.map((service) => service.name),
+  "Autre demande ou question générale",
+];
+
+const visitSteps = [
+  {
+    title: "Écrivez-nous ou appelez-nous",
+    text: "Indiquez l'âge de votre enfant et ce que vous recherchez : l'équipe revient vers vous rapidement.",
+  },
+  {
+    title: "Choisissez un moment de visite",
+    text: "L'équipe vous propose un créneau pour découvrir les espaces et poser toutes vos questions — en famille, si vous le souhaitez.",
+  },
+  {
+    title: "Posez toutes vos questions",
+    text: "Sections, horaires, repas, inscriptions : la visite est le bon moment pour tout aborder.",
+  },
+] as const;
+
+const inscriptionSteps = [
+  {
+    title: "Prendre contact",
+    text: "Par formulaire, téléphone ou e-mail : précisez l'âge de votre enfant et la section souhaitée (crèche ou maternelle).",
+  },
+  {
+    title: "Visiter l'école",
+    text: "L'équipe vous propose un créneau de visite pour découvrir les espaces et échanger sur vos besoins.",
+  },
+  {
+    title: "Constituer le dossier",
+    text: "La liste des documents à fournir est communiquée par l'école, selon la section et la période d'inscription.",
+  },
+  {
+    title: "Confirmer la place",
+    text: "L'équipe valide l'inscription avec vous et vous précise les modalités pratiques de la rentrée.",
+  },
+] as const;
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    breadcrumb="Contact"
+    eyebrow="Contact"
+    eyebrowIcon="message-circle"
+    title="Parlons de votre enfant"
+    intro="Une question, une demande d'inscription, l'envie de visiter l'école ? Écrivez-nous, appelez-nous — ou passez nous voir."
+  />
+
+  <section id="visite" class="scroll-mt-28 pb-20 pt-10 sm:pt-12 lg:pb-28">
+    <div class="container-x grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+      <div>
+        <SectionHeading
+          eyebrow="Demande de renseignements"
+          eyebrowIcon="send"
+          title="Écrivez-nous, nous vous répondrons"
+          intro="Votre demande arrive directement à l'école. Plus votre message est précis, plus la réponse sera utile."
+        />
+        <div class="mt-8" data-reveal>
+          <ContactForm
+            client:visible
+            email={site.emails.primary}
+            serviceOptions={serviceOptions}
+            phoneDisplay={site.phone.display}
+            phoneHref={site.phone.href}
+          />
+        </div>
+      </div>
+
+      <div class="space-y-6 lg:pt-20">
+        <div class="card-soft p-6 sm:p-8" data-reveal>
+          <span class="icon-chip bg-sun/40 text-ink">
+            <Icon name="calendar-check" class="size-6" />
+          </span>
+          <h2 class="mt-4 font-display text-2xl font-semibold text-forest">
+            Préparer votre visite
+          </h2>
+          <ol class="mt-5 space-y-4">
+            {
+              visitSteps.map((step, index) => (
+                <li class="flex gap-4">
+                  <span class="flex size-8 shrink-0 items-center justify-center rounded-full bg-forest font-display text-sm font-semibold text-cream">
+                    {index + 1}
+                  </span>
+                  <span>
+                    <h3 class="font-display text-lg font-semibold text-forest">{step.title}</h3>
+                    <p class="mt-1 text-[15px] leading-relaxed text-ink-soft">{step.text}</p>
+                  </span>
+                </li>
+              ))
+            }
+          </ol>
+          <p class="mt-5 flex items-start gap-2 rounded-2xl bg-sky/15 px-4 py-3 text-sm text-ink-soft">
+            <Icon name="info" class="mt-0.5 size-4 shrink-0 text-sky-deep" />
+            Les visites sont organisées du lundi au vendredi : convenez d'un créneau avec
+            l'équipe avant de vous déplacer.
+          </p>
+        </div>
+
+        <div class="card-soft p-6 sm:p-8" data-reveal style="--reveal-delay: 90ms">
+          <span class="icon-chip bg-sky/25 text-sky-deep">
+            <Icon name="map-pin" class="size-6" />
+          </span>
+          <h2 class="mt-4 font-display text-2xl font-semibold text-forest">Nous trouver</h2>
+          <p class="mt-3 leading-relaxed text-ink-soft">
+            {site.address.street}<br />
+            {site.address.city} {site.address.postalCode} — {site.address.country}
+          </p>
+          <a
+            href={site.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link-more mt-4"
+          >
+            Ouvrir l'itinéraire sur Google Maps
+            <Icon name="external-link" class="size-4" />
+          </a>
+          <p class="mt-4 text-sm text-ink-soft/90">
+            Le lien ouvre une nouvelle fenêtre : aucune donnée n'est transmise avant votre clic.
+          </p>
+        </div>
+
+        <div class="card-soft p-6 sm:p-8" data-reveal style="--reveal-delay: 180ms">
+          <span class="icon-chip bg-sage/20 text-sage-deep">
+            <Icon name="clock" class="size-6" />
+          </span>
+          <h2 class="mt-4 font-display text-2xl font-semibold text-forest">
+            Horaires d'accueil
+          </h2>
+          <dl class="mt-4 space-y-2.5">
+            {
+              hoursSummary.map((row) => (
+                <div class="flex items-baseline justify-between gap-4 rounded-2xl bg-cream px-4 py-2.5">
+                  <dt class="text-sm font-bold text-ink-soft">{row.label}</dt>
+                  <dd class="font-display font-semibold text-forest">{row.value}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          <p class="mt-4 text-sm text-ink-soft/90">
+            Horaires indicatifs, à confirmer selon les sections :
+            <a href="/nos-services/#horaires" class="font-bold text-forest underline underline-offset-4">
+              voir le détail
+            </a>
+            .
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="documents-inscriptions" class="scroll-mt-28 bg-white pb-20 pt-16 sm:pt-20 lg:pb-28">
+    <div class="container-x">
+      <SectionHeading
+        eyebrow="Documents & inscriptions"
+        eyebrowIcon="notebook-pen"
+        title="Comment se déroule une inscription"
+        intro="La procédure dépend de la section et de la période. Voici comment cela se passe, étape par étape."
+      />
+
+      <ol class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          inscriptionSteps.map((step, index) => (
+            <li class="rounded-[1.75rem] bg-cream p-6 shadow-sm ring-1 ring-ink/5" data-reveal style={`--reveal-delay: ${index * 70}ms`}>
+              <span class="flex size-10 items-center justify-center rounded-2xl bg-forest font-display text-lg font-semibold text-cream">
+                {index + 1}
+              </span>
+              <h3 class="mt-4 font-display text-xl font-semibold text-forest">{step.title}</h3>
+              <p class="mt-3 text-[15px] leading-relaxed text-ink-soft">{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-2" data-reveal>
+        <p class="flex items-start gap-3 rounded-2xl bg-sun/20 px-5 py-4 text-[15px] text-ink-soft">
+          <Icon name="info" class="mt-0.5 size-5 shrink-0 text-sun-deep" />
+          <span>
+            Aucun document n'est à télécharger sur ce site : les listes de documents et les
+            formulaires à jour sont remis directement par l'école, pour éviter toute version
+            obsolète.
+          </span>
+        </p>
+        <p class="flex items-start gap-3 rounded-2xl bg-cream px-5 py-4 text-[15px] text-ink-soft">
+          <Icon name="circle-check" class="mt-0.5 size-5 shrink-0 text-sage-deep" />
+          <span>
+            Les tranches d'âge (crèche : 3 – 24 mois ; maternelle : 2 – 6 ans) et les places
+            disponibles sont confirmées par l'équipe lors de votre demande.
+          </span>
+        </p>
+      </div>
+
+      <div class="mt-10 flex flex-wrap items-center gap-3" data-reveal>
+        <a href={site.phone.href} class="btn btn-primary px-6 py-3 text-base">
+          <Icon name="phone" class="size-5" />
+          {site.phone.display}
+        </a>
+        <a href={`mailto:${site.emails.primary}`} class="btn btn-outline px-6 py-3 text-base">
+          <Icon name="mail" class="size-5" />
+          Écrire à l'école
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

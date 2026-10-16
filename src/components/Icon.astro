@@ -1,0 +1,22 @@
+---
+/**
+ * Icône Lucide intégrée en ligne au moment de la compilation.
+ * Usage : <Icon name="phone" class="size-5" />
+ * Décorative par défaut (aria-hidden) : les libellés guident les lecteurs d'écran.
+ */
+import { ICONS, type IconName } from "./icon-map";
+
+interface Props {
+  name: IconName;
+  class?: string;
+}
+
+const { name, class: className = "size-6" } = Astro.props;
+const svg = ICONS[name];
+---
+
+<span
+  class:list={["inline-flex shrink-0 items-center justify-center [&>svg]:size-full", className]}
+  set:html={svg}
+  aria-hidden="true"
+/>

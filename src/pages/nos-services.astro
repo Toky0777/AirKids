@@ -1,0 +1,171 @@
+---
+/**
+ * Nos services : crèche, maternelle, garderie, ateliers et fêtes,
+ * puis les horaires détaillés (ancre #horaires).
+ */
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import HoursTable from "@/components/HoursTable.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Icon from "@/components/Icon.astro";
+import Doodle from "@/components/Doodle.astro";
+import { services } from "@/data/services";
+import { site } from "@/data/site";
+
+const title = "Nos services : crèche, maternelle, garderie et ateliers | Air Kids Madagascar";
+const description =
+  "Crèche (3–24 mois), maternelle et préscolaire (2–6 ans), garderie avant et après l'école, ateliers de vacances et fêtes : découvrez les services d'Air Kids à Ankerana, Antananarivo, et les horaires d'accueil.";
+
+const quickLinks = [
+  ...services.map((service) => ({
+    href: `#${service.anchor}`,
+    label: service.name,
+    icon: service.icon,
+  })),
+  { href: "#horaires", label: "Horaires", icon: "clock" as const },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    breadcrumb="Nos services"
+    eyebrow="Nos services"
+    eyebrowIcon="blocks"
+    title="Des services pensés pour chaque âge"
+    intro="De la crèche à la maternelle, en passant par la garderie et les ateliers, chaque enfant est accueilli dans un cadre adapté à son âge et à son rythme."
+  />
+
+  <section class="pb-6 pt-10">
+    <div class="container-x" data-reveal>
+      <nav aria-label="Sommaire des services" class="rounded-[1.75rem] bg-white p-5 shadow-card sm:p-6">
+        <h2 class="font-display text-lg font-semibold text-forest">Aller directement à…</h2>
+        <ul class="mt-4 flex flex-wrap gap-2.5">
+          {
+            quickLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="inline-flex items-center gap-2 rounded-full bg-cream px-4 py-2 text-sm font-bold text-forest transition hover:bg-sun/60"
+                >
+                  <Icon name={link.icon} class="size-4 text-sage-deep" />
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  {
+    services.map((service, index) => (
+      <section
+        id={service.anchor}
+        class:list={["scroll-mt-28", index % 2 === 1 ? "bg-white" : ""]}
+      >
+        <div class="section-pad container-x grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div class:list={["relative", index % 2 === 1 && "lg:order-2"]} data-reveal>
+            <Doodle kind="blob" class="absolute -left-10 -top-8 h-44 w-44 text-sun/25" />
+            <div class="relative overflow-hidden rounded-[2.5rem] border-[6px] border-white shadow-soft">
+              <Image
+                src={service.image}
+                alt={service.imageAlt}
+                widths={[420, 620, 800]}
+                sizes="(min-width: 1024px) 46vw, 92vw"
+                loading="lazy"
+                decoding="async"
+                class="aspect-[4/3] w-full object-cover"
+              />
+            </div>
+            <Doodle
+              kind="flower"
+              class="absolute -top-5 right-6 h-11 w-11 text-coral animate-sway"
+            />
+          </div>
+
+          <div>
+            <p class="eyebrow">
+              <Icon name={service.icon} class="size-4" />
+              {service.ages ?? service.tagline}
+            </p>
+            <h2 class="mt-4 text-3xl sm:text-4xl">{service.name}</h2>
+            <p class="mt-4 leading-relaxed text-ink-soft" data-reveal>
+              {service.summary}
+            </p>
+
+            <ul class="mt-6 grid gap-2.5 sm:grid-cols-2" data-reveal>
+              {service.details.map((detail) => (
+                <li class="flex items-start gap-2.5 rounded-2xl bg-white px-4 py-3 text-[15px] text-ink-soft shadow-sm">
+                  <Icon name="circle-check" class="mt-0.5 size-5 shrink-0 text-sage-deep" />
+                  <span>{detail}</span>
+                </li>
+              ))}
+            </ul>
+
+            {service.toConfirm && (
+              <p
+                class="mt-5 flex items-start gap-2 rounded-2xl bg-sun/20 px-4 py-3 text-sm text-ink-soft"
+                data-reveal
+              >
+                <Icon name="info" class="mt-0.5 size-4 shrink-0 text-sun-deep" />
+                <span>
+                  Les périodes et les modalités précises de ce service sont confirmées par
+                  l'équipe lors de votre demande.
+                </span>
+              </p>
+            )}
+
+            <div class="mt-7 flex flex-wrap items-center gap-3" data-reveal>
+              <a href="/contact/#visite" class="btn btn-primary px-6 py-3 text-base">
+                <Icon name="message-circle" class="size-5" />
+                Demander des renseignements
+              </a>
+              <a href={site.phone.href} class="btn btn-outline px-6 py-3 text-base">
+                <Icon name="phone" class="size-5" />
+                {site.phone.display}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  <section id="horaires" class="scroll-mt-28 bg-white">
+    <div class="section-pad container-x">
+      <SectionHeading
+        eyebrow="Horaires"
+        eyebrowIcon="clock"
+        title="Horaires d'accueil et de sortie"
+        intro="Les enfants sont accueillis le matin et l'après-midi ; les sorties sont échelonnées pour que chacun parte sans précipitation."
+      />
+
+      <div class="mt-10">
+        <HoursTable />
+      </div>
+
+      <p
+        class="mt-6 flex flex-col items-start gap-3 rounded-2xl bg-cream px-5 py-4 text-[15px] text-ink-soft sm:flex-row sm:items-center sm:justify-between"
+        data-reveal
+      >
+        <span class="flex items-start gap-2">
+          <Icon name="info" class="mt-0.5 size-4 shrink-0 text-sage-deep" />
+          Un doute sur les horaires de votre section ? L'équipe les confirme directement, par
+          téléphone ou lors de votre visite.
+        </span>
+        <a href="/contact/" class="link-more shrink-0">
+          Nous contacter
+          <Icon name="arrow-right" class="size-4" />
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Un service qui correspond à l'âge de votre enfant ?"
+    text="Parlez-nous de votre enfant : l'équipe vous confirmera la section adaptée, les modalités et les places disponibles."
+  />
+</BaseLayout>

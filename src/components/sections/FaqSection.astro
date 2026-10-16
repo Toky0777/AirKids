@@ -1,0 +1,45 @@
+---
+/** Section 10 — Questions fréquentes. */
+import Doodle from "@/components/Doodle.astro";
+import FaqList from "@/components/FaqList.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import { site } from "@/data/site";
+---
+
+<section class="section-pad relative overflow-hidden">
+  <Doodle kind="blob" class="absolute -left-24 top-16 h-64 w-64 text-sage/20" />
+
+  <div class="container-x relative grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+    <div>
+      <SectionHeading
+        eyebrow="Questions fréquentes"
+        eyebrowIcon="message-circle"
+        title="Vos questions, nos réponses"
+        intro="Les familles nous interrogent souvent sur les âges, les horaires, les repas ou les inscriptions. Voici l'essentiel — et pour tout le reste, l'équipe reste joignable."
+      />
+
+      <div class="mt-8 rounded-[1.75rem] bg-forest p-6 text-cream shadow-card" data-reveal>
+        <p class="font-display text-lg font-semibold">Une autre question ?</p>
+        <p class="mt-2 text-[15px] text-cream/85">
+          Appelez-nous, écrivez-nous, ou passez nous voir : nous répondrons avec plaisir.
+        </p>
+        <div class="mt-5 flex flex-col gap-3">
+          <a href={site.phone.href} class="btn btn-sun px-5 py-3 text-base">
+            <Icon name="phone" class="size-5" />
+            {site.phone.display}
+          </a>
+          <a
+            href={`mailto:${site.emails.primary}`}
+            class="btn btn-ghost-light px-5 py-3 text-base"
+          >
+            <Icon name="mail" class="size-5" />
+            Écrire à l'école
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <FaqList />
+  </div>
+</section>
